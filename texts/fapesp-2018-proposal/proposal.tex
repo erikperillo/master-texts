@@ -38,7 +38,7 @@
 \titulo{Attention as a leverage for Deep Learning}
 \orientadora{Prof.a. Dr.a. Esther Luna Colombini}
 
-\paginasiniciais
+%\paginasiniciais
 \section*{Abstract}
 Attention is fundamental for intelligent beings.
 It is necessary for filtering the significant volumes of stimuli we constantly receive
@@ -50,7 +50,7 @@ In this context, this work proposes the study and elaboration of approaches to u
 for more power and efficiency to solve problems in Artificial Intelligence.
 We aim at obtaining techniques more generically applicable in broad problem classes
 such as Computer Vision, Natural Language Processing, Differential Programming and others.
-\fimdaspaginasiniciais
+%\fimdaspaginasiniciais
 
 
 \chapter{Introduction}
@@ -331,27 +331,77 @@ where $\alpha$ is the learning rate.
 \let\clearpage\relax
 
 \chapter{Related Work}
-TODO: detailed examples on DL + attention.
-maybe cite our previous work here?
-%In vision, we can cite problems such as visual saliency
-%(figure \ref{fig:saliency}): In a given image, which region should be
-%first focused on? Older computacional models generally extracted
-%hand-crafted features regarding color, luminance and image
-%statistics~\cite{ref:judd}.
-%A significant boost in performance~\cite{ref:mit300-bm} was achieved
-%with the adoption of Deep Learning models with arquitechture components
-%specifically designed for the context of saliency detection ~\cite{ref:deepfix}
-%~\cite{ref:salicon}~\cite{ref:mlnet}.
-%In previous work~\cite{ref:erik-esther}, which is result from a Undergraduate
-%Research project conducted by the author
-%-- and received `'best undergraduate research project'' award from
-%the institute of computing at Unicamp in 2017 --
-%we developed a fully convolutional neural network that emcompasses
-%arquitechture and data processing specifically design for the saliency
-%detection task.
-%While having similar performance to that of top models
-%(in the MIT Saliency Benchmark) at the time,
-%the model was composed of significantly less parameters than other models.
+The topic of integrating Attention concepts into Deep Learning has been increasingly frequent
+in the community (c).
+Augmenting the capabilities of neural network architectures with attention has shown promising results
+in problems from a variety of fields in which Deep Learning is currently being applied to, such as
+Computer Vision, Natural Language Processing and Differential Programming.
+In this section, we highlight some recent works.
+
+%TODO: detailed examples on DL + attention.
+%maybe cite our previous work here?
+\subsection{Recurrent Attention Model (RAM)}
+The work \cite{ref:rec-models} considers a commonly known problem in computer vision: it is usually
+expensive to perform processing on images and widely used current models such as
+CNNs tend to require computational resources proportional to the number of pixels in the image.
+The work proposes a \emph{Recurrent Attention Model (RAM)}, a recurrent neural network augmented by
+an attentional component regarded as \emph{Glimpse Module} that is trained via Reinforcement Learning.
+The Glimpse Module enables the network to select a point in the image from which it extracts `'glimpses''
+-- patches of the image at different resolutions but with the same dimensions.
+These glimpes and the selected location are encoded and given as input to produce
+the new hidden state of the core RNN architecture.
+The dimensionality of the glimpes is much smaller than that of the image and furthermore does not depend
+on the dimensions of the input image.
+The authors evaluate the model for classification tasks in the MNIST (c) dataset and variations in which the
+input images are filled more background pixels (resulting in a larger image) and clutter.
+The proposed model outperforms a convolutional neural network baseline.
+Furthermore, the attentional module in the model enables it to perform the same amount of computation
+regardless of the input size of the image and to focus sequentially only at the relevant parts of the image,
+which reduces the adversary effect of clutter.
+
+\subsection{Attention-based Encoder-Decoder Networks}
+Encoder-decoder networks are a general framework used generally for mapping from input to outputs that both
+are of highly-dimensional (often unstructured) data (c), having being successfully used for tasks such
+as machine translation (c).
+One drawback of such architecture is that the encoded feature vector is of fixed size and structure --
+regardless of the input -- and not necessarily preserves spatial/temporal structure from the input.
+The work in ~\cite{enc-dec} proposes the usage of an attentional module in between encoder and decoder.
+The proposed model's encoder produces feature vectors that have a explicit spatio-temporal structure
+(\emph{context set}) of the input and the attentional module uses a relevance evaluation
+method to select a subset of the outputs -- either by soft attention or hard attention.
+This allows the encoder-decoder for more flexibility to select the components of the input that are of
+more relevance.
+The authors implemented and evaluated the method for several applications:
+\begin{itemize}
+    \item \emph{Image Caption Generation}: The goal of the task is to provide a natural language description
+        of an input image.
+        The proposed model uses a CNN as encoder and RNN as decoder -- with the attentional model in between.
+        The model was ranked third in \emph{MS COCO Captioning Challenge} and provided highly interpretable
+        results regarding the importance of the regions of the image to each component of the sentence
+        (see figure \ref{fig:description}).
+    \item \emph{Neural Machine Translation}: The authors proposed a RNN architecture
+        augmented with the attention module,
+        which provided relative improvement of roughly 60\% when compared to the same model without attention.
+        The model also performs better than state of the art in some languages.
+        It was also possible to obtain a weight matrix that maps the importance of input to output words
+        since the context set provides structural information of the input.
+    \item \emph{Neural Speech Recognition}: The goal of the task is to translate audio to text sentences by
+        using fully neural networks.
+        The proposed model uses RNNs between the attention module and the model achieved state-of-the art
+        results in the TIMIT corpus (c) and the outputs provide attention weights from the input signal
+        to produced phonemes.
+\end{itemize}
+Overall, the proposed technique -- besides achieving state of the art results --
+produces a semantic mapping from the input space to the output space even when they are of different nature
+-- without explicitly being supervised to produce this mapping.
+
+\subsection{Neural Turing Machines}
+
+\subsection{Adaptive computation time for RNNs}
+
+\subsection{The Transformer architecture}
+
+\subsection{Neural Programmer}
 
 \let\clearpage\relax
 
