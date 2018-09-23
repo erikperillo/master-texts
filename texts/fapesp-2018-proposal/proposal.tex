@@ -1,4 +1,4 @@
-\documentclass[English]{style/ic-tese-v3}
+\documentclass[12pt]{article}
 
 \usepackage[latin1,utf8]{inputenc}
 
@@ -13,12 +13,12 @@
 \usepackage[T1]{fontenc}
 \usepackage{titlesec}
 \usepackage{subfig}
-\titlespacing{\chapter}{0pt}{0pt}{0pt}
+\titlespacing{\section}{0pt}{0pt}{0pt}
 
-\titleformat{\chapter}%
-  {\normalfont\bfseries\Huge}{\thechapter.}{10pt}{}
+\titleformat{\section}%
+  {\normalfont\bfseries\Huge}{\thesection.}{10pt}{}
 
-\titleformat{\chapter}{\normalfont\bfseries\huge}{\thechapter}{10pt}{\huge\bf\vspace{5mm}}
+\titleformat{\section}{\normalfont\bfseries\huge}{\thesection}{10pt}{\huge\bf\vspace{5mm}}
 \usepackage{adjustbox}
 \usepackage{amsmath}
 \usepackage{multirow}
@@ -28,33 +28,70 @@
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.13}
 \usepackage{caption}
+\usepackage{logo-ic-unicamp}
+\usepackage{logo-unicamp}
+\usepackage[backend=biber]{biblatex}
 \captionsetup[table]{skip=5pt}
+\usepackage{setspace}
+\bibliography{proposal.bib}
+\usepackage{geometry}
+
+\geometry{a4paper,top=20mm,bottom=20mm,left=30mm,right=20mm}
+
+\def\logos{
+  \noindent
+  \begin{center}
+  \begin{tabular}{ccc}
+    \raisebox{-.5\height}{\LogoUnicamp}
+    &
+    \begin{minipage}{.6\textwidth}
+      \centering
+      \textbf{\@UNICAMP} \\
+      \textbf{Institute of Computing} \\
+    \end{minipage}
+    &
+    \raisebox{-.45\height}{\scalebox{1.11}{\LogoIcUnicampWithName}}
+  \end{tabular}
+  \end{center}
+}
 
 \begin{document}
 
 % Escolha entre autor ou autora:
-\documento{Research Project}
+%\documento{Research Project}
 
-\autor{Erik de Godoy Perillo}
-\titulo{Attention as a leverage for Deep Learning}
-\orientadora{Prof.a. Dr.a. Esther Luna Colombini}
+\begin{titlepage}
+    \logos
+	\centering
+	{\scshape\Large Research Proposal\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Attention as a leverage for Deep Learning\par}
+	\vspace{1cm}
+	{\itshape Erik de Godoy Perillo\par}
+	{\itshape Advisor: Profa. Dra. Esther Luna Colombini\par}
+	\vspace{0.5cm}
+	\begin{abstract}
+        Attention is fundamental for intelligent beings.
+        It is necessary for filtering the significant volumes of stimuli we constantly receive
+        and for applying the adequate mental resources to perform tasks.
+        Deep Learning is currently broadly applied to Artificial Intelligence.
+        The use of Attention in Deep Learning has been increasingly frequent,
+        resulting many times in better results.
+        In this context, this work proposes the study and elaboration of approaches
+        to use Attention in Deep Learning
+        for more power and efficiency to solve problems in Artificial Intelligence.
+        We aim at obtaining a framework generically applicable in broad problem classes
+        such as Computer Vision, Natural Language Processing, Program Composition and others.
+	\end{abstract}
+	\vfill
+	University of Campinas
+	\vfill
+	{\large \today\par}
+\end{titlepage}
 
-\paginasiniciais
-\section*{Abstract}
-Attention is fundamental for intelligent beings.
-It is necessary for filtering the significant volumes of stimuli we constantly receive
-and for applying the adequate mental resources to perform tasks.
-Deep Learning is currently broadly applied to Artificial Intelligence.
-The use of Attention in Deep Learning has been increasingly frequent,
-resulting many times in better results.
-In this context, this work proposes the study and elaboration of approaches to use Attention in Deep Learning
-for more power and efficiency to solve problems in Artificial Intelligence.
-We aim at obtaining a framework generically applicable in broad problem classes
-such as Computer Vision, Natural Language Processing, Program Composition and others.
-\fimdaspaginasiniciais
+\newpage
 
-
-\chapter{Introduction}
+\section{Introduction}
 We continually receive high volumes of multimodal stimuli from both external sources
 -- such as visual, auditive signals -- and internal sources -- proprioception, memories et cetera.
 It would be very inefficient or even impossible to process all the information with
@@ -107,9 +144,10 @@ Other examples -- which will be discussed in-depth in following sections -- incl
 translation~\cite{ref:translation}, audio recognition~\cite{ref:audio} and neural computation~\cite{ref:ntm}.
 These are evidence that concepts of Attention have indeed been useful for the field.
 
+\newpage
 \begin{figure}
 \begin{center}
-	\includegraphics[width=0.9\linewidth]{./img/img_captioning.png}
+	\includegraphics[width=0.7\linewidth]{./img/img_captioning.png}
 \caption{
     Diagram of natural language image description using Attention
     (from \cite{ref:img-captioning}).
@@ -118,7 +156,7 @@ These are evidence that concepts of Attention have indeed been useful for the fi
 \end{center}
 \end{figure}
 
-\section{Motivation and Objectives}
+\subsection{Motivation and Objectives}
 In spite of the recent adoption of Attention by a variety of Deep Learning models
 and the significant improvements it has shown, it is conjectured that there are still many other tasks
 that are still not very well explored.
@@ -154,8 +192,9 @@ Deep Learning design have been broadly useful.
 Examples include the ideas of \emph{Curriculum Learning}~\cite{ref:curriculum}
 and \emph{Generative Adversarial Networks}~\cite{ref:gans}.
 
-\chapter{Background}
-\section{Attention}
+\newpage
+\section{Background}
+\subsection{Attention}
 \label{attention}
 The interest in the concept of Attention exists since a long time ago.
 Throughout the years, Attention has been studied
@@ -164,7 +203,7 @@ such as philosophy, psychology, and neurology.
 There are multiple definitions of the concept.
 In the next items, we discuss some concrete aspects related to Attention.
 
-\subsection{A definition}
+\subsubsection{A definition}
 We can define Attention as
 \emph{the act of applying mental resources to selected stimuli following an allocation policy specific to
     a particular goal}.
@@ -178,7 +217,7 @@ that is perhaps even conflicting with ours but
 these are the terms that we choose our work to be based on -- noting that they
 reasonably capture common concepts of interest by us and other works.~\cite{ref:helgason}
 
-\subsection{Functionalities of Attention}
+\subsubsection{Functionalities of Attention}
 Attention can be manifested in different manners depending on the goal.
 The most notable functionalities shown in intelligent beings are:
 \begin{itemize}
@@ -192,7 +231,7 @@ The most notable functionalities shown in intelligent beings are:
         or even in alternating the focus to multiple tasks at the same time.
 \end{itemize}
 
-\subsection{Bottom-up and Top-down Attention}
+\subsubsection{Bottom-up and Top-down Attention}
 \label{bu-td}
 Focus may emerge in two fundamentally different manners~\cite{ref:esther-thesis}~\cite{ref:vocus}.
 In bottom-up Attention, the act of focusing is involuntarily
@@ -210,8 +249,8 @@ we focus on what the specific person is saying
 \begin{figure}
 \begin{center}
 		\begin{tabular} {cc}
-		\includegraphics[width=0.40\linewidth]{./img/traffic_sign_s.jpg} &
-		\includegraphics[width=0.40\linewidth]{./img/traffic_sign_m.jpg}\\
+		\includegraphics[width=0.35\linewidth]{./img/traffic_sign_s.jpg} &
+		\includegraphics[width=0.35\linewidth]{./img/traffic_sign_m.jpg}\\
         (a) & (b)
 		\end{tabular}
 \caption{Example of visual saliency.
@@ -221,7 +260,7 @@ we focus on what the specific person is saying
 \end{center}
 \end{figure}
 
-\subsection{Soft and Hard Attention}
+\subsubsection{Soft and Hard Attention}
 In recent years, there has been an useful distinction between
 soft and hard Attention~\cite{ref:att-survey}.
 Soft Attention regards defining a continuous distribution of importance
@@ -236,7 +275,7 @@ one might want to determine a specific location $(i, j)$ of the image
 to be used as center of a small patch of the image that is the most
 relevant to be further processed.
 
-\section{Deep Learning}
+\subsection{Deep Learning}
 Deep Learning (DL) is a trend in modern AI~\cite{ref:dl}.
 Although DL started being broadly adopted around 12 years ago,
 some of its concepts date to much earlier than that~\cite{ref:dl}:
@@ -262,7 +301,7 @@ primarily trained for a given task can be used and adapted for another
 task while using at least part of the representations learned.
 We discuss some concepts related to DL in following items.
 
-\subsection{Artificial Neural Networks}
+\subsubsection{Artificial Neural Networks}
 Artificial Neural Networks (ANNs) are usually adopted to prediction
 learning problems by means of learning a non-linear function aproximation.
 The ideas used in ANNs date to more than 50 years ago~\cite{ref:perceptron} and many of them
@@ -336,14 +375,14 @@ machine translation~\cite{ref:rnn-nlp}.
 Some variations over the original basic architecture such as
 LSTMs are also broadly adopted.
 
-\subsubsection{Modern architectures}
+\textbf{Modern architectures}
 Modern work on Deep Learning propose models of greater complexity than cited above.
 Some present completely novice architectures, but most of works tend to be
 based on a combination of basic neural networks architectures. The final results, however, may consist
 of completely new contributions to new tasks.
-Some examples will be discussed in chapter \ref{sess:related-work}.
+Some examples will be discussed in section \ref{sess:related-work}.
 
-\subsection{Learning process}
+\subsubsection{Learning process}
 The act of learning the appropriate weights of a given model
 is usually obtained by the minimization of a differentiable loss function
 that is based on the cost function $L(y, \hat{y})$ that characterizes the error
@@ -361,19 +400,19 @@ $$\theta_{i+1} = \theta_i - \alpha\frac{\partial{J}}{\partial{\theta}}$$
 where $\alpha$ is the learning rate.
 
 \let\clearpage\relax
-\newpage
 
-\chapter{Related Work} \label{sess:related-work}
+\newpage
+\section{Related Work} \label{sess:related-work}
 The topic of integrating Attention concepts into Deep Learning has been increasingly frequent
 in the community~\cite{ref:att-survey}.
 Augmenting the capabilities of neural network architectures with Attention has shown promising results
 in problems from a variety of fields in which Deep Learning is currently being applied to, such as
 Computer Vision, Natural Language Processing and differentiable programming in general.
-In this section, we address some recent works.
+In this subsection, we address some recent works.
 We highlight how Attention was used by the authors and how it affected the performance of the proposed models
 on evaluation tasks.
 
-\subsection{Attention-based Encoder-Decoder Networks}
+\subsubsection{Attention-based Encoder-Decoder Networks}
 Encoder-decoder networks are a general framework used generally for mapping from input to outputs that both
 are of highly-dimensional (often unstructured) data, having being successfully used for tasks such
 as machine translation~\cite{ref:enc-dec-rnns}.
@@ -411,7 +450,7 @@ produces a semantic mapping from the input space to the output space even when t
 
 \begin{figure}
 \begin{center}
-    \includegraphics[width=0.5\linewidth]{./img/nt-att.png}
+    \includegraphics[width=0.31\linewidth]{./img/nt-att.png}
 \caption{
     Visualization of Attention weights of the neural machine translation model
     based on Encoder-Decoder networks.
@@ -421,7 +460,7 @@ produces a semantic mapping from the input space to the output space even when t
 \end{center}
 \end{figure}
 
-\subsection{Adaptive computation time for RNNs}
+\subsubsection{Adaptive computation time for RNNs}
 Most of current works use Attention as a mechanism for filtering.
 The authors of the work in \cite{ref:act} propose a RNN augmented with an Attention module that allows for
 dynamic inference of number of computation steps for each time step.
@@ -436,7 +475,7 @@ dataset~\cite{ref:hutter}, in which the model yielded insights into the structur
 
 \begin{figure}
 \begin{center}
-    \includegraphics[width=1.0\linewidth]{./img/adaptive_comp.png}
+    \includegraphics[width=0.9\linewidth]{./img/adaptive_comp.png}
 \caption{
     Diagram of the adaptive RNN.
     Each time step can have the amount of computations varied by an Attention distribution.
@@ -446,7 +485,7 @@ dataset~\cite{ref:hutter}, in which the model yielded insights into the structur
 \end{center}
 \end{figure}
 
-\subsection{Neural Turing Machines (NTMs)}
+\subsubsection{Neural Turing Machines (NTMs)}
 Neural Turing Machines~\cite{ref:ntm} are one of the first attempts on building models that can learn to
 formulate programs based on DL architectures with continuous cost functions
 -- and thus trainable via gradient descent.
@@ -474,7 +513,7 @@ The authors show that the model is able to learn simple algorithms such as sorti
 \end{center}
 \end{figure}
 
-\subsection{Recurrent Attention Model (RAM)}
+\subsubsection{Recurrent Attention Model (RAM)}
 The work \cite{ref:rec-models} considers a commonly known problem in Computer Vision: it is usually
 expensive to perform processing on images and widely used current models such as
 CNNs tend to require computational resources proportional to the number of pixels in the image.
@@ -493,7 +532,7 @@ Furthermore, the attentional module in the model enables it to perform the same 
 regardless of the input size of the image and to focus sequentially only at the relevant parts of the image,
 which reduces the adversary effect of clutter.
 
-\subsection{Neural Programmer}
+\subsubsection{Neural Programmer}
 Deep Learning techniques have been useful for perception tasks in the last years, but tasks that involve
 complex logic and reasoning are still a major challenge.
 Authors in \cite{ref:np} propose a model that learns to induce programs by composing basic logic operations
@@ -505,7 +544,7 @@ The model achieved nearly perfect accuracy and yielded superior performance comp
 
 \begin{figure}
 \begin{center}
-    \includegraphics[width=0.7\linewidth]{./img/neural-programmer.png}
+    \includegraphics[width=0.5\linewidth]{./img/neural-programmer.png}
 \caption{
     Sequence of operations being carried out by the Neural Programmer model.
     Attention distributes the weights to each operation.
@@ -515,7 +554,7 @@ The model achieved nearly perfect accuracy and yielded superior performance comp
 \end{center}
 \end{figure}
 
-\subsection{The Transformer architecture}
+\subsubsection{The Transformer architecture}
 Sequence models such as RNNs and more specifically LSTMs are broadly used for sequence modeling tasks such
 as machine translation.
 The work proposed in \cite{ref:transformer} aims at overcoming some challenges inerent to such sequential
@@ -544,15 +583,15 @@ The proposed model achieved state of the art results on \emph{WMT 2014 English-t
 \let\clearpage\relax
 \newpage
 
-\chapter{Methodology}
-\section{Activities}
+\section{Methodology}
+\subsection{Activities}
 The work can be summarized in three main activities (or \textbf{phases}):
 \begin{itemize}
     \item \textbf{1. Literature Review}: an extensive survey on current uses of Attention in modern
         Deep Learning.
     \item \textbf{2. Proposal of an Attention framework for Deep Learning}: \
         devision of a set components of Attention currently used/to be used in Deep Learning design
-        from previous activity and further survey.
+        from results of previous phase and further survey.
     \item \textbf{3. Implementation of Attention in Deep Learning}:
         proposal of one or more models with components of Attention and evaluations on a set of tasks.
 \end{itemize}
@@ -561,10 +600,10 @@ The activities to be executed are more specifically described as follows:
 
 \begin{itemize}
     \item \textbf{A1.1 - Theoretical definition of Attention and its components:}
-        Using a variety of previous works~\cite{ref:helgason}\cite{ref:esther-thesis},
+        From a variety of previous works~\cite{ref:helgason}\cite{ref:esther-thesis},
         we establish a theoretical framework of Attention
-        -- extending what was discussed in section \ref{attention} --
-        from which we base all future work.
+        -- extending what was discussed in subsection \ref{attention} --
+        on which all posterior work will be based.
         It is worth noting that this theoretical framework is not necessarily the same as the framework
         we propose to produce specifically for Deep Learning in phase 2.
 
@@ -619,10 +658,12 @@ Other activities to be done related to the masters program are:
     \item \textbf{A0.4 - Defense of masters dissertation.}
 \end{itemize}
 
-\subsection{Schedule}
+\subsubsection{Schedule}
+Table~\ref{table:sched} details the project schedule.
 
 \begin{table}[H]
 \centering
+\caption{\small Project schedule.}
 \scriptsize
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 	\hline
@@ -658,21 +699,22 @@ Other activities to be done related to the masters program are:
     \textbf{A0.4} &     &     &     &     &     &     &     &     &     &     &     &     &     &     & $*$ \\
     \hline
 \end{tabular}
+\label{table:sched}
 \end{table}
 
-\chapter{Preliminary Work}
-In order to perform an initial exploration on applying Attention concepts to Deep Learning in order
-to approach a problem, we investigate the application of visual saliency to image classification.
+\section{Preliminary Work}
+In order to perform an initial exploration on applying Attention concepts to Deep Learning,
+we investigate the application of visual saliency to the image classification problem.
 
-\section{Visual saliency}
-Visual saliency (introduced in section \ref{bu-td}) is a well-documented phenomenon in
+\subsection{Visual saliency}
+Visual saliency (introduced in subsection \ref{bu-td}) is a well-documented phenomenon in
 humans~\cite{ref:guided-search}\cite{ref:fit}.
 The phenomenon is normally classified as part of the \emph{selective, bottom up} components of
 Attention~\cite{ref:vocus}.
 We tend to guide our visual focus first to elements that are conspicuous (in the context of the scene).
 Figure \ref{fig:saliency} exemplifies the phenomenon.
 The problem of using computers to predict where humans look
-consists of, given image $I$, generate a \emph{saliency map} $S$ with pixels values in $[0, 1]$ whereas
+consists of, given image $I$, generate a \emph{saliency map} $S$ with pixels valued in $[0, 1]$ whereas
 higher intensity pixels represent locations that are more likely to be salient to humans.
 There are datasets with human eye-fixation data~\cite{ref:salicon-dataset}
 that enable training of Deep Learning models to approach the problem.
@@ -687,7 +729,7 @@ in WTD2017~\cite{ref:wtd2017} for the work.
 
 \begin{figure}
 \begin{center}
-	\includegraphics[width=0.9\linewidth]{./img/deeppeek.png}
+	\includegraphics[width=0.7\linewidth]{./img/deeppeek.png}
 \caption{\
     Illustration of the convolutional neural network architecture proposed in \cite{ref:erik-esther}.
 }
@@ -695,7 +737,7 @@ in WTD2017~\cite{ref:wtd2017} for the work.
 \end{center}
 \end{figure}
 
-\section{Image Classification}
+\subsection{Image Classification}
 Image classification is a classical problem in Computer Vision.
 It consists of, given image $I$, predicting one or more classes
 $c_i$ from the set $C$ to which the image belongs.
@@ -705,7 +747,7 @@ Part of the recent popularization of Deep Learning comes from the performance ga
 Convolutional Neural Networks have yielded in the competition
 in past years~\cite{ref:imagenet}\cite{ref:inceptionv3}.
 
-\section{Experiment: Visual Saliency for Image Classification}
+\subsection{Experiment: Visual Saliency for Image Classification}
 Many state-of-the art models for image classification support as input images with either fixed dimensions
 or a rather limited range of dimensions.
 For large images or images with too much clutter, there must be a pre-processing step to
@@ -717,33 +759,34 @@ are relevant for the task.
 In the proposed experiment, we use visual saliency to guide the selection of the area of the image to
 be cropped.
 
-\subsection{Methodology}
-\subsubsection{Visual saliency model}
-We use a visual saliency convolutional neural network model similar to the proposed in~\cite{ref:erik-esther},
-but with a unet-like~\cite{ref:unet} architecture.
-This model was proposed in a following work~\cite{ref:ic-erik} of the authors of this document and
-consists of even less parameters yet yields similar performance.
+\subsubsection{Methodology}
 
-\subsubsection{Classification model}
+\textbf{Visual saliency model:}
+A visual saliency convolutional neural network model similar to the proposed in~\cite{ref:erik-esther},
+but with a unet-like~\cite{ref:unet} architecture was used.
+This model was proposed in a work~\cite{ref:ic-erik} of the authors of this document
+and consists of even less parameters than the first cited model yet yields similar performance.
+
+\textbf{Classification model:}
 For classification, we use Inception V3~\cite{ref:inceptionv3} with pre-trained weights.
 The model accepts as input RGB images of width and height of, respectively, 299 and 299 pixels.
 
-\subsubsection{Dataset}
+\textbf{Dataset:}
 $47039$ images from the ImageNet 2012 challenge validation set were used.
 There are images with a variety of dimensions.
 
-\subsubsection{Cropping strategies}
+\textbf{Cropping strategies:}
 Three cropping strategies are used:
 \begin{enumerate}
-    \item \textbf{Central cropping}: a patch of dimensions $299$x$299$ is cropped at the center of the image.
-    \item \textbf{Random cropping}: a random point $i, j$ is selected with uniform probability and the
+    \item \textbf{Central cropping -} a patch of dimensions $299$x$299$ is cropped at the center of the image.
+    \item \textbf{Random cropping -} a random point $i, j$ is selected with uniform probability and the
         patch is cropped around the point.
-    \item \textbf{Salient cropping}:
+    \item \textbf{Salient cropping -}
         the visual saliency network is used to compute the salient map $S$ of the image
         and the point $i, j$ is selected based on the saliency map.
 \end{enumerate}
 
-\subsubsection{Selecting the point from the saliency map}
+\textbf{Selecting the point from the saliency map:}
 Given the saliency map $S$ of the image, a normalized version of the squared map is computed:
 $$S_n = S^2/\sum\limits_{i,j}\left({S^2}\right)_{i,j}$$
 The points $i$ (row) and $j$ (column) of the image $I$ -- with dimensions $W$, $H$ --
@@ -752,18 +795,18 @@ at the respective pixel:
 $$i_{sal} = \left\lfloor \sum\limits_{i=1}^H\sum\limits_{j=1}^W i\left(S_n\right)_{i,j} \right\rfloor,
   j_{sal} = \left\lfloor \sum\limits_{i=1}^H\sum\limits_{j=1}^W j\left(S_n\right)_{i,j} \right\rfloor$$
 
-\subsubsection{Evaluation}
-For cropping strategy used, the $47039$ generated images were used as input for the classifier.
-Then the average top-1 accuracy is computed for each configuration.
+\textbf{Evaluation:}
+For each cropping strategy used, the respective $47039$ generated images were used as input for the classifier.
+Then, the average top-1 accuracy is computed for each configuration.
 
-\subsubsection{Implementation}
+\textbf{Implementation:}
 The saliency network was implemented in \emph{Tensorflow 1.10.1}.
 The classifier network was used from \emph{keras 2.2.2} with \emph{Tensorflow} backend.
 Experiment was carried out on a machine with \emph{Ubuntu 16.04 LTS} and kernel \emph{Linux 4.15.0-30-generic}.
 Inference was conducted on a GPU \emph{NVIDIA GTX1080}.
 The code for the experiment is available at \texttt{https://github.com/erikperillo/sal-classif}.
 
-\subsection{Results}
+\subsubsection{Results}
 Table~\ref{table:results} shows the average top-1 error for each configuration on ImageNet validation set.
 Salient cropping showed a slight (but considerable) improvement in comparison to random cropping.
 Besides, it is worth noting that a well-known phenomenon named \emph{center bias}~\cite{ref:centerbias}
@@ -790,6 +833,16 @@ for examples of the saliency maps and cropped patches obtained.
 \end{tabular}
 \label{table:results}
 \end{table}
+
+\subsubsection{Discussion}
+The results show that a reasonably simple combination of a concept of Attention with a Deep Learning
+approach was beneficial for the task, with potential of being even more useful in settings in which
+center bias is less frequent in images.
+
+More work in this direction could include a combination of the visual saliency network with
+the classification network at an architecture level
+-- for example, by adding one or more convolutional layers that combine the last convolutional layers
+of the saliency and classification networks and further training.
 
 \begin{figure}
 \scriptsize
@@ -875,24 +928,14 @@ for examples of the saliency maps and cropped patches obtained.
 \label{fig:exp4}
 \end{center}
 \end{figure}
+%\renewcommand\bibname{References\vspace*{10mm}}
+\printbibliography
 
-\subsection{Discussion}
-The results show that a reasonably simple combination of a concept of attention with a Deep Learning
-approach was beneficial for the task, with potential of being even more useful in settings in which
-center bias is less frequent in images.
-
-More work in this direction could include a combination of the visual saliency network with
-the classification network at an architecture level
--- for example, by adding one or more convolutional layers that combine the last convolutional layers
-of the saliency and classification networks and further training.
-
-\renewcommand\bibname{References\vspace*{10mm}}
-
-\begingroup
-\let\clearpage\relax
-\bibliographystyle{plain}
-\bibliography{proposal.bib}
+%\begingroup
+%\let\clearpage\relax
+%\bibliographystyle{plain}
+%\bibliography{proposal.bib}
 %\printbibliography
-\endgroup
+%\endgroup
 
 \end{document}

@@ -40,7 +40,7 @@
 
 \RequirePackage{setspace}
 \RequirePackage{geometry}
-\geometry{a4paper,top=30mm,bottom=20mm,left=30mm,right=20mm}
+\geometry{a4paper,top=20mm,bottom=20mm,left=35mm,right=15mm}
 
 \RequirePackage{fancyhdr}
 
@@ -148,6 +148,8 @@
 \def\paginasiniciais{
   \newlength{\oldparindent}
   \setlength{\oldparindent}{\parindent}
+  %\setlength{\parskip}{0.1em}
+  %\linespread{1.0}
 %  \setlength\parindent{0pt}
   \thispagestyle{empty}
   %\pagestyle{empty}
