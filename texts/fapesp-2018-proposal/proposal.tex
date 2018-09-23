@@ -22,6 +22,7 @@
 \usepackage{adjustbox}
 \usepackage{amsmath}
 \usepackage{multirow}
+\usepackage{multicol}
 \usepackage{float}
 \usepackage{pgfplotstable}
 \usepackage{pgfplots}
@@ -38,7 +39,7 @@
 \titulo{Attention as a leverage for Deep Learning}
 \orientadora{Prof.a. Dr.a. Esther Luna Colombini}
 
-%\paginasiniciais
+\paginasiniciais
 \section*{Abstract}
 Attention is fundamental for intelligent beings.
 It is necessary for filtering the significant volumes of stimuli we constantly receive
@@ -50,7 +51,7 @@ In this context, this work proposes the study and elaboration of approaches to u
 for more power and efficiency to solve problems in Artificial Intelligence.
 We aim at obtaining a framework generically applicable in broad problem classes
 such as Computer Vision, Natural Language Processing, Program Composition and others.
-%\fimdaspaginasiniciais
+\fimdaspaginasiniciais
 
 
 \chapter{Introduction}
@@ -192,6 +193,7 @@ The most notable functionalities shown in intelligent beings are:
 \end{itemize}
 
 \subsection{Bottom-up and Top-down Attention}
+\label{bu-td}
 Focus may emerge in two fundamentally different manners~\cite{ref:esther-thesis}~\cite{ref:vocus}.
 In bottom-up Attention, the act of focusing is involuntarily
 started and guided by (usually) external and conspicuous stimuli,
@@ -237,7 +239,7 @@ relevant to be further processed.
 \section{Deep Learning}
 Deep Learning (DL) is a trend in modern AI~\cite{ref:dl}.
 Although DL started being broadly adopted around 12 years ago,
-some of its concepts date to much earlier than that~\cite{ref:dl-history}:
+some of its concepts date to much earlier than that~\cite{ref:dl}:
 foundations of artificial neural networks were already discussed
 in the 1950s, backpropagation was introduced in the 1970s
 and many other key concepts that are popular mostly in the last decade or less
@@ -549,10 +551,10 @@ The work can be summarized in three main activities (or \textbf{phases}):
     \item \textbf{1. Literature Review}: an extensive survey on current uses of Attention in modern
         Deep Learning.
     \item \textbf{2. Proposal of an Attention framework for Deep Learning}: \
-        from previous activity and further survey,
-        devision of a set components of Attention currently used/to be used in Deep Learning design.
+        devision of a set components of Attention currently used/to be used in Deep Learning design
+        from previous activity and further survey.
     \item \textbf{3. Implementation of Attention in Deep Learning}:
-        propose one or more models with components of Attention and carry out evaluations on a set of tasks.
+        proposal of one or more models with components of Attention and evaluations on a set of tasks.
 \end{itemize}
 
 The activities to be executed are more specifically described as follows:
@@ -658,15 +660,231 @@ Other activities to be done related to the masters program are:
 \end{tabular}
 \end{table}
 
-\section{Preliminary Work}
-\begin{itemize}
-    \item Introduce image classification.
-    \item Talk about the problem of getting patches from images.
-    \item Introduce visual saliency.
-    \item Introduce previous work.
-    \item Talk about your experiment.
-    \item Talk about results.
-\end{itemize}
+\chapter{Preliminary Work}
+In order to perform an initial exploration on applying Attention concepts to Deep Learning in order
+to approach a problem, we investigate the application of visual saliency to image classification.
+
+\section{Visual saliency}
+Visual saliency (introduced in section \ref{bu-td}) is a well-documented phenomenon in
+humans~\cite{ref:guided-search}\cite{ref:fit}.
+The phenomenon is normally classified as part of the \emph{selective, bottom up} components of
+Attention~\cite{ref:vocus}.
+We tend to guide our visual focus first to elements that are conspicuous (in the context of the scene).
+Figure \ref{fig:saliency} exemplifies the phenomenon.
+The problem of using computers to predict where humans look
+consists of, given image $I$, generate a \emph{saliency map} $S$ with pixels values in $[0, 1]$ whereas
+higher intensity pixels represent locations that are more likely to be salient to humans.
+There are datasets with human eye-fixation data~\cite{ref:salicon-dataset}
+that enable training of Deep Learning models to approach the problem.
+
+In a previous undergraduate research work, the authors of this document proposed a convolutional neural
+network architecture specific for visual saliency prediction~\cite{ref:erik-esther}
+(see figure~\ref{fig:deeppeek}).
+The model was evaluated on the MIT300 benchmark~\cite{ref:mit-bm} and it achieved performance comparable
+to the state-of-the art yet with a parameter reduction of $3/4$ compared to similar models.
+The student was awarded `'best undergraduate research project''
+in WTD2017~\cite{ref:wtd2017} for the work.
+
+\begin{figure}
+\begin{center}
+	\includegraphics[width=0.9\linewidth]{./img/deeppeek.png}
+\caption{\
+    Illustration of the convolutional neural network architecture proposed in \cite{ref:erik-esther}.
+}
+\label{fig:deeppeek}
+\end{center}
+\end{figure}
+
+\section{Image Classification}
+Image classification is a classical problem in Computer Vision.
+It consists of, given image $I$, predicting one or more classes
+$c_i$ from the set $C$ to which the image belongs.
+ImageNet~\cite{ref:imagenet-dset} consists of a dataset for image classification with of over 14 million images
+and also an image classification challenge.
+Part of the recent popularization of Deep Learning comes from the performance gains that
+Convolutional Neural Networks have yielded in the competition
+in past years~\cite{ref:imagenet}\cite{ref:inceptionv3}.
+
+\section{Experiment: Visual Saliency for Image Classification}
+Many state-of-the art models for image classification support as input images with either fixed dimensions
+or a rather limited range of dimensions.
+For large images or images with too much clutter, there must be a pre-processing step to
+adjust the image for the network.
+A common practice is to resize the image.
+Another approach is to crop a certain region of the image.
+In such case, central cropping is usually applied, but it sometimes might discard parts that
+are relevant for the task.
+In the proposed experiment, we use visual saliency to guide the selection of the area of the image to
+be cropped.
+
+\subsection{Methodology}
+\subsubsection{Visual saliency model}
+We use a visual saliency convolutional neural network model similar to the proposed in~\cite{ref:erik-esther},
+but with a unet-like~\cite{ref:unet} architecture.
+This model was proposed in a following work~\cite{ref:ic-erik} of the authors of this document and
+consists of even less parameters yet yields similar performance.
+
+\subsubsection{Classification model}
+For classification, we use Inception V3~\cite{ref:inceptionv3} with pre-trained weights.
+The model accepts as input RGB images of width and height of, respectively, 299 and 299 pixels.
+
+\subsubsection{Dataset}
+$47039$ images from the ImageNet 2012 challenge validation set were used.
+There are images with a variety of dimensions.
+
+\subsubsection{Cropping strategies}
+Three cropping strategies are used:
+\begin{enumerate}
+    \item \textbf{Central cropping}: a patch of dimensions $299$x$299$ is cropped at the center of the image.
+    \item \textbf{Random cropping}: a random point $i, j$ is selected with uniform probability and the
+        patch is cropped around the point.
+    \item \textbf{Salient cropping}:
+        the visual saliency network is used to compute the salient map $S$ of the image
+        and the point $i, j$ is selected based on the saliency map.
+\end{enumerate}
+
+\subsubsection{Selecting the point from the saliency map}
+Given the saliency map $S$ of the image, a normalized version of the squared map is computed:
+$$S_n = S^2/\sum\limits_{i,j}\left({S^2}\right)_{i,j}$$
+The points $i$ (row) and $j$ (column) of the image $I$ -- with dimensions $W$, $H$ --
+are then selected using an weighted average of the coordinates and the values of the normalized saliency map
+at the respective pixel:
+$$i_{sal} = \left\lfloor \sum\limits_{i=1}^H\sum\limits_{j=1}^W i\left(S_n\right)_{i,j} \right\rfloor,
+  j_{sal} = \left\lfloor \sum\limits_{i=1}^H\sum\limits_{j=1}^W j\left(S_n\right)_{i,j} \right\rfloor$$
+
+\subsubsection{Evaluation}
+For cropping strategy used, the $47039$ generated images were used as input for the classifier.
+Then the average top-1 accuracy is computed for each configuration.
+
+\subsubsection{Implementation}
+The saliency network was implemented in \emph{Tensorflow 1.10.1}.
+The classifier network was used from \emph{keras 2.2.2} with \emph{Tensorflow} backend.
+Experiment was carried out on a machine with \emph{Ubuntu 16.04 LTS} and kernel \emph{Linux 4.15.0-30-generic}.
+Inference was conducted on a GPU \emph{NVIDIA GTX1080}.
+The code for the experiment is available at \texttt{https://github.com/erikperillo/sal-classif}.
+
+\subsection{Results}
+Table~\ref{table:results} shows the average top-1 error for each configuration on ImageNet validation set.
+Salient cropping showed a slight (but considerable) improvement in comparison to random cropping.
+Besides, it is worth noting that a well-known phenomenon named \emph{center bias}~\cite{ref:centerbias}
+in likely to exist in
+the dataset: most photographs are more likely to be taken with the main object of interest at the center,
+but it may not be true in other settings such as more cluttered images or photographs not taken by humans.
+See figures~\ref{fig:exp1},~\ref{fig:exp2},~\ref{fig:exp3} and~\ref{fig:exp4}
+for examples of the saliency maps and cropped patches obtained.
+
+\begin{table}[H]
+\centering
+	\small
+\caption{Cropping strategies and top-1 accuracy on ImageNet validation set.}
+\begin{tabular}{|c|c|}
+	\hline
+    Strategy & top-1 accuracy\\
+    \hline
+    Center cropping & $0.766$\\
+    \hline
+    Random cropping & $0.729$\\
+    \hline
+    Salient cropping & \textbf{0.769}\\
+    \hline
+\end{tabular}
+\label{table:results}
+\end{table}
+
+\begin{figure}
+\scriptsize
+\begin{center}
+    \begin{tabular} {cc}
+    \includegraphics[width=0.25\linewidth]{./img/crops/5-raw.JPEG} &
+    \includegraphics[width=0.25\linewidth]{./img/crops/5-sals.png} \\
+    (a) & (b) \\
+    \end{tabular}\\
+    \begin{tabular} {ccc}
+    \includegraphics[width=0.2\linewidth]{./img/crops/5-central.JPEG} &
+    \includegraphics[width=0.2\linewidth]{./img/crops/5-rand.JPEG} &
+    \includegraphics[width=0.2\linewidth]{./img/crops/5-soft.JPEG} \\
+    (c) & (d) & (e)\\
+    \end{tabular}
+\caption{\small Example of image and cropping strategies.
+    (a) is the original image, (b) is the saliency map produced by the network,
+    (c) is the central crop, (d) is the random crop, (e) is the salient crop.}
+\label{fig:exp1}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\scriptsize
+\begin{center}
+    \begin{tabular} {cc}
+    \includegraphics[width=0.25\linewidth]{./img/crops/6-raw.JPEG} &
+    \includegraphics[width=0.25\linewidth]{./img/crops/6-sals.png} \\
+    (a) & (b) \\
+    \end{tabular}\\
+    \begin{tabular} {ccc}
+    \includegraphics[width=0.2\linewidth]{./img/crops/6-central.JPEG} &
+    \includegraphics[width=0.2\linewidth]{./img/crops/6-rand.JPEG} &
+    \includegraphics[width=0.2\linewidth]{./img/crops/6-soft.JPEG} \\
+    (c) & (d) & (e)\\
+    \end{tabular}
+\caption{\small Example of image and cropping strategies.
+    (a) is the original image, (b) is the saliency map produced by the network,
+    (c) is the central crop, (d) is the random crop, (e) is the salient crop.
+    Only the salient crop framed the two entities in the image.}
+\label{fig:exp2}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\scriptsize
+\begin{center}
+    \begin{tabular} {cc}
+    \includegraphics[width=0.25\linewidth]{./img/crops/11-raw.JPEG} &
+    \includegraphics[width=0.25\linewidth]{./img/crops/11-sals.png} \\
+    (a) & (b) \\
+    \end{tabular}\\
+    \begin{tabular} {ccc}
+    \includegraphics[width=0.2\linewidth]{./img/crops/11-central.JPEG} &
+    \includegraphics[width=0.2\linewidth]{./img/crops/11-rand.JPEG} &
+    \includegraphics[width=0.2\linewidth]{./img/crops/11-soft.JPEG} \\
+    (c) & (d) & (e)\\
+    \end{tabular}
+\caption{\small Example of image and cropping strategies.
+    (a) is the original image, (b) is the saliency map produced by the network,
+    (c) is the central crop, (d) is the random crop, (e) is the salient crop.}
+\label{fig:exp3}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\scriptsize
+\begin{center}
+    \begin{tabular} {cc}
+    \includegraphics[width=0.25\linewidth]{./img/crops/18-raw.JPEG} &
+    \includegraphics[width=0.25\linewidth]{./img/crops/18-sals.png} \\
+    (a) & (b) \\
+    \end{tabular}\\
+    \begin{tabular} {ccc}
+    \includegraphics[width=0.2\linewidth]{./img/crops/18-central.JPEG} &
+    \includegraphics[width=0.2\linewidth]{./img/crops/18-rand.JPEG} &
+    \includegraphics[width=0.2\linewidth]{./img/crops/18-soft.JPEG} \\
+    (c) & (d) & (e)\\
+    \end{tabular}
+\caption{\small Example of image and cropping strategies.
+    (a) is the original image, (b) is the saliency map produced by the network,
+    (c) is the central crop, (d) is the random crop, (e) is the salient crop.}
+\label{fig:exp4}
+\end{center}
+\end{figure}
+
+\subsection{Discussion}
+The results show that a reasonably simple combination of a concept of attention with a Deep Learning
+approach was beneficial for the task, with potential of being even more useful in settings in which
+center bias is less frequent in images.
+
+More work in this direction could include a combination of the visual saliency network with
+the classification network at an architecture level
+-- for example, by adding one or more convolutional layers that combine the last convolutional layers
+of the saliency and classification networks and further training.
 
 \renewcommand\bibname{References\vspace*{10mm}}
 
