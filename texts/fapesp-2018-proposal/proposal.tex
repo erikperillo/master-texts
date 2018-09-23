@@ -117,7 +117,7 @@ These are evidence that concepts of Attention have indeed been useful for the fi
 \end{center}
 \end{figure}
 
-\section{Objectives}
+\section{Motivation and Objectives}
 In spite of the recent adoption of Attention by a variety of Deep Learning models
 and the significant improvements it has shown, it is conjectured that there are still many other tasks
 that are still not very well explored.
@@ -146,7 +146,8 @@ Therefore, the specific objectives of this work are:
 
 The main contribution of the work proposed is related to the first four items:
 we wish to
-\emph{establish a theoretical framework on how to implement Attention in Deep Learning architectures}.
+\emph{establish a theoretical framework of Attention as a series of components
+    and its applicabilities to Deep Learning.}
 Recent works show that the effort on establishing more general concepts and frameworks for
 Deep Learning design have been broadly useful.
 Examples include the ideas of \emph{Curriculum Learning}~\cite{ref:curriculum}
@@ -154,6 +155,7 @@ and \emph{Generative Adversarial Networks}~\cite{ref:gans}.
 
 \chapter{Background}
 \section{Attention}
+\label{attention}
 The interest in the concept of Attention exists since a long time ago.
 Throughout the years, Attention has been studied
 from various perspectives~\cite{ref:esther-thesis}
@@ -541,14 +543,130 @@ The proposed model achieved state of the art results on \emph{WMT 2014 English-t
 \newpage
 
 \chapter{Methodology}
-TODO:
+\section{Activities}
+The work can be summarized in three main activities (or \textbf{phases}):
 \begin{itemize}
-    \item description of stages: lit review,
-        search for problems, generalization, application
+    \item \textbf{1. Literature Review}: an extensive survey on current uses of Attention in modern
+        Deep Learning.
+    \item \textbf{2. Proposal of an Attention framework for Deep Learning}: \
+        from previous activity and further survey,
+        devision of a set components of Attention currently used/to be used in Deep Learning design.
+    \item \textbf{3. Implementation of Attention in Deep Learning}:
+        propose one or more models with components of Attention and carry out evaluations on a set of tasks.
 \end{itemize}
 
-\section{Schedule}
-TODO: the schedule.
+The activities to be executed are more specifically described as follows:
+
+\begin{itemize}
+    \item \textbf{A1.1 - Theoretical definition of Attention and its components:}
+        Using a variety of previous works~\cite{ref:helgason}\cite{ref:esther-thesis},
+        we establish a theoretical framework of Attention
+        -- extending what was discussed in section \ref{attention} --
+        from which we base all future work.
+        It is worth noting that this theoretical framework is not necessarily the same as the framework
+        we propose to produce specifically for Deep Learning in phase 2.
+
+    \item \textbf{A1.2 - Elaboration of survey:}
+        Exploration of selected work under the point of view of the theoretical framework established
+        in \textbf{A1.1}.
+        For each work, we identify the main components of Attention the authors use, the consequences for the
+        performance in the application domain and elaborate a critial evaluation.
+
+    \item \textbf{A1.3 - Survey article writing:}
+        Writing of an article with results of phase $2$ to be sent to an appropriate journal.
+
+    \item \textbf{A2.1 - Establishment of Attention components for specific Deep Learning domains:}
+        From the theoretical framework obtained in \textbf{A1.1}
+        and the exploration of current uses and results in \textbf{A1.2},
+        we devise sets of useful components of Attention for specific main problem domains
+        in which Deep Learning is broadly used,
+        such as image classification, text-to-speech, language translation, image segmentation.
+
+    \item \textbf{A2.2 - Establishment of Attention framework for Deep Learning:}
+        From the theoretical framework obtained in \textbf{A1.1},
+        exploration of current uses and results in \textbf{A1.2} and
+        results from \textbf{A2.1},
+        we elaborate a set of components of Attention under a single framework to be applied to more
+        general areas of use of Deep Learning,
+        such as Computer Vision, Sequence Processing, Program Composition.
+
+    \item \textbf{A3.1 - Arrangement of experiments:}
+        From the framework obtained in phase 2, we select a set of problem domains (such as text-to-speech),
+        Deep Learning models to use, components of Attention to implement and metrics to evaluate the task.
+        The activity aims at selecting all main devised components from phase $2$ in order
+        to evaluate the real consequences of their adoption against what was predicted.
+
+    \item \textbf{A3.2 - Execution of experiments:}
+        We implement and execute the planned experiments following a pre-defined protocol that
+        pays special attention to reproducibility.
+
+    \item \textbf{A3.3 - Evaluation of experimental results:}
+        We evaluate the results using established metrics for each experiment,
+        elaborating discussions that include interesting aspects of the results in general and
+        comparisons between the theoretical predictions and the concrete outcomes.
+
+    \item \textbf{A3.4 - Experiments article writing:}
+        Writing of an article with results of phase $3$ to be sent to an appropriate conference.
+\end{itemize}
+
+Other activities to be done related to the masters program are:
+\begin{itemize}
+    \item \textbf{A0.1 - Course's requirement fulfillment.}
+    \item \textbf{A0.2 - Qualification Exam.}
+    \item \textbf{A0.3 - Masters dissertation.}
+    \item \textbf{A0.4 - Defense of masters dissertation.}
+\end{itemize}
+
+\subsection{Schedule}
+
+\begin{table}[H]
+\centering
+\scriptsize
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+	\hline
+    \multirow{2}{*}{\textbf{Activity}}
+        & \multicolumn{3}{|c|}{\textbf{2018}} & \multicolumn{12}{|c|}{\textbf{2019}}\\
+    \cline{2-16}
+                  & Oct & Nov & Dec & Jan & Feb & Mar & Apr & May & Jun & Jul & Aug & Sep & Oct & Nov & Dec\\
+    \hline
+    \textbf{A0.1} & $*$ & $*$ & $*$ &     &     &     &     &     &     &     &     &     &     &     &     \\
+    \hline
+    \textbf{A1.1} & $*$ &     &     &     &     &     &     &     &     &     &     &     &     &     &     \\
+    \hline
+    \textbf{A1.2} &     & $*$ & $*$ & $*$ & $*$ &     &     &     &     &     &     &     &     &     &     \\
+    \hline
+    \textbf{A1.3} &     &     &     &     &     & $*$ &     &     &     &     &     &     &     &     &     \\
+    \hline
+    \textbf{A0.2} &     &     &     &     &     & $*$ &     &     &     &     &     &     &     &     &     \\
+    \hline
+    \textbf{A2.1} &     &     &     &     &     &     & $*$ &     &     &     &     &     &     &     &     \\
+    \hline
+    \textbf{A2.2} &     &     &     &     &     &     & $*$ &     &     &     &     &     &     &     &     \\
+    \hline
+    \textbf{A3.1} &     &     &     &     &     &     &     & $*$ &     &     &     &     &     &     &     \\
+    \hline
+    \textbf{A3.2} &     &     &     &     &     &     &     & $*$ & $*$ & $*$ & $*$ &     &     &     &     \\
+    \hline
+    \textbf{A3.3} &     &     &     &     &     &     &     &     &     &     &     & $*$ &     &     &     \\
+    \hline
+    \textbf{A3.4} &     &     &     &     &     &     &     &     &     &     &     & $*$ &     &     &     \\
+    \hline
+    \textbf{A0.3} &     &     &     &     &     &     &     &     &     &     &     & $*$ & $*$ & $*$ & $*$ \\
+    \hline
+    \textbf{A0.4} &     &     &     &     &     &     &     &     &     &     &     &     &     &     & $*$ \\
+    \hline
+\end{tabular}
+\end{table}
+
+\section{Preliminary Work}
+\begin{itemize}
+    \item Introduce image classification.
+    \item Talk about the problem of getting patches from images.
+    \item Introduce visual saliency.
+    \item Introduce previous work.
+    \item Talk about your experiment.
+    \item Talk about results.
+\end{itemize}
 
 \renewcommand\bibname{References\vspace*{10mm}}
 
