@@ -182,7 +182,7 @@
       \textbf{\@IC} \\
     \end{minipage}
     &
-    \raisebox{-.45\height}{\scalebox{1.11}{\LogoIcUnicampWithName}}
+    \raisebox{-.45\height}{\scalebox{1.11}{style/logo-ic.pdf}}
   \end{tabular}
   \end{center}
 }
