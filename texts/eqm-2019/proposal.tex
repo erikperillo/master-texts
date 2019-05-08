@@ -706,11 +706,12 @@ In this section we briefly describe the results of the activities performed so f
 
 \subsection{Theoretical Definition of Attention}
 Activity \textbf{A0.1} (described in~\ref{sec:activities}) was successfully completed,
-resulting in a theoretical framework for attention upon which we can build future work.
+resulting in a theoretical framework~\cite{ref:framework} for attention upon which we can build future work.
 This task is very important since we want to be as clear as possible regarding what we define as ``attention''.
 In the framework, we define a set of \emph{entities of interest} and the phenomenon of Attention in terms of
 its \emph{functionalities} and how it relates to the entities.
 An initial definition was given in~\ref{sec:attdef} -- we used part of it as a basis for the complete framework.
+Here we mention the most relevant aspects of the framework.
 
 \subsubsection{Why is our framework good?}
 We believe our framework encompasses what we generally (and intuitively) refer to as attention while being not too broad.
@@ -767,42 +768,13 @@ The three variables might vary as well.
 The taxonomy can be summarized as follows:
 
 \begin{itemize}
-    \item \textbf{Actions}:
-    \begin{itemize}
-        \item Selection
-    \end{itemize}
-
-    \item \textbf{Targets}:
-    \begin{itemize}
-        \item Data
-        \begin{itemize}
-            \item Item-wise
-            \item Location-wise
-            \item Feature-wise
-        \end{itemize}
-        \item Program
-        \item Resources
-    \end{itemize}
-
-    \item \textbf{Continuity}:
-    \begin{itemize}
-        \item Soft
-        \item Hard
-    \end{itemize}
-
-    \item \textbf{Time signature}:
-    \begin{itemize}
-        \item One to one
-        \item One to many
-        \item Many to one
-        \item Many to many
-    \end{itemize}
-
-    \item \textbf{Action initiator}:
-    \begin{itemize}
-        \item Internal (top-down)
-        \item External (bottom-up)
-    \end{itemize}
+    \item \textbf{Actions}: Selection
+    \item \textbf{Targets}: Data (Item-wise, Location-wise, Feature-wise),
+        Program, Resources
+    \item \textbf{Continuity}: Soft, Hard
+    \item \textbf{Time signature}: One to one, One to many, Many to one,
+        Many to many
+    \item \textbf{Action initiator}: Internal (top-down), External (bottom-up)
 \end{itemize}
 
 \subsection{Survey}
@@ -819,32 +791,23 @@ which we summarize below:
     \item \textbf{Publication date range}: from 2014 to 2019
     \item \textbf{Databases searched}:
     \begin{itemize}
-        \item \textbf{arXiv} - \texttt{https://arxiv.org/}
-        \item \textbf{DeepMind} - \texttt{https://deepmind.com/research/publications/}
-        \item \textbf{Google AI} - \texttt{https://ai.google/research/pubs/}
-        \item \textbf{OpenAI} - \texttt{https://openai.com/research/#publications}
-        \item \textbf{Facebook AI research} - \texttt{https://research.fb.com/publications/}
-        \item \textbf{Microsoft research} - \texttt{https://www.microsoft.com/en-us/research/search/}
-        \item \textbf{Amazon research} - \texttt{https://www.aboutamazon.com/publications}
-        \item \textbf{Google Scholar} - \texttt{https://scholar.google.com.br/}
-        \item \textbf{IEEE Xplore} - \texttt{https://ieeexplore.ieee.org/Xplore/home.jsp}
-        \item \textbf{DBLP} - \texttt{https://dblp1.uni-trier.de}
-        \item \textbf{ACM} - \texttt{https://dl.acm.org/}
-        \item \textbf{NIPS} - \texttt{https://nips.cc/}
-        \item \textbf{ICML} - \texttt{https://icml.cc/}
-        \item \textbf{ICLR} - \texttt{https://iclr.cc/}
-        \item \textbf{AAAI} - \texttt{http://www.aaai.org/}
-        \item \textbf{CVPR} - \texttt{http://cvpr2018.thecvf.com/}
-        \item \textbf{ICCV} - \texttt{http://iccv2017.thecvf.com/}
-        \item \textbf{CoRR} - \texttt{https://arxiv.org/corr/home}
-        \item \textbf{Neurocomputing} - \texttt{https://www.journals.elsevier.com/neurocomputing}
+        \item \textbf{arXiv} - \url{https://arxiv.org/}
+        \item \textbf{DeepMind} - \url{https://deepmind.com/research/publications/}
+        \item \textbf{Google AI} - \url{https://ai.google/research/pubs/}
+        \item \textbf{OpenAI} - \url{https://openai.com/research/#publications}
+        \item \textbf{Facebook AI research} - \url{https://research.fb.com/publications/}
+        \item \textbf{Microsoft research} - \url{https://www.microsoft.com/en-us/research/search/}
+        \item \textbf{Amazon research} - \url{https://www.aboutamazon.com/publications}
+        \item \textbf{DBLP} - \url{https://dblp1.uni-trier.de}
+        \item \textbf{NIPS} - \url{https://nips.cc/}
+        \item \textbf{ICML} - \url{https://icml.cc/}
+        \item \textbf{ICLR} - \url{https://iclr.cc/}
+        \item \textbf{AAAI} - \url{http://www.aaai.org/}
+        \item \textbf{CVPR} - \url{http://cvpr2018.thecvf.com/}
+        \item \textbf{ICCV} - \url{http://iccv2017.thecvf.com/}
     \end{itemize}
-    \item \textbf{Terms (in title or abstract)}:
-    \begin{itemize}
-        \item attention
-        \item attentive
-        \item attentional
-    \end{itemize}
+    \item \textbf{Terms (in title or abstract)}: ``attention'',
+        ``attentive'' or ``attentional''
 \end{itemize}
 
 The relevance of each work was confirmed upon reading of the abstract.
@@ -853,14 +816,21 @@ As a result, we collected around 300 papers.
 \subsubsection{Literature Visualizations}
 Some visualizations were generated for the works collected with the intent
 to have some insights regarding the collection acquired.
-Some visualizations generated were:
-\begin{itemize}
-    \item Citations graph (authors and works)
-    \item Abstract/title word frequencies
-    \item Frequency of attention-themed papers over years
-    \item Relative Frequency of attention-themed papers over years for some databases (arXiv, CVPR, DBLP)
-\end{itemize}
+Some visualizations generated were: Citations graph (authors and works),
+Abstract/title word frequencies, Frequency of attention-themed papers over years,,
+Relative Frequency of attention-themed papers over years for some databases (arXiv, CVPR, DBLP).
 Visualizations were generated by a set of scripts which can be found at \url{https://github.com/erikperillo/litrev}.
+One example of visualization is figure~\ref{fig:citations}.
+
+\begin{figure}
+\begin{center}
+    \includegraphics[width=0.7\linewidth]{./img/titles-graph.pdf}
+\caption{
+    Citation graph of the top cited papers generated by litrev tool.
+}
+\label{fig:citations}
+\end{center}
+\end{figure}
 
 \subsubsection{Paper relevance analysis}
 With the collection in hands, the next goal was to assess the relevance and problem domain of each work
@@ -876,11 +846,42 @@ work and it was given based on criteria such as:
 \end{itemize}
 
 \subsubsection{Reading and summarization of works}
-This step (which is in progress) aims at reading each paper of the collection in depth (in order of relevance, from highest to lowest) and generating a summary for each work.
+This step (which is in progress) aims at reading each paper of the collection in depth
+(in order of relevance, from highest to lowest) and generating a summary for each work.
 A summary template was formulated~\cite{ref:paper-anal-template} and summaries were generated for some works.
 This is the main step of the survey and it's expected to be the longest.
 The goal is to further refine our theoretical framework and guide the reading of future papers as we read those papers
 -- in an iterative manner.
+Survey has shown so far that the use of attention in Deep Learning has indeed provided improvements in basically all
+subfields of DL.
+Table~\ref{table:taxonomy} shows the taxonomy classification for some of the most relevant works analyzed so far in the survey.
+
+\begin{table}[H]
+\centering
+\caption{\small Works classified by taxonomy}
+\begin{tabular}{|c|c|c|}
+	\hline
+    \textbf{Model} & \textbf{Selection Target} & \textbf{Continuity}\\
+    \hline
+    \cite{ref:show-attend-tell} & Data & Soft\\
+    \hline
+    \cite{ref:rec-models} & Data & Hard\\
+    \hline
+    \cite{ref:one-shot} & Data & Soft\\
+    \hline
+    \cite{ref:act} & Resources & Soft\\
+    \hline
+    \cite{ref:ntm} & Data & Soft\\
+    \hline
+    \cite{ref:img-captioning} & Data & Soft\\
+    \hline
+    \cite{ref:np} & Program & Soft\\
+    \hline
+    \cite{ref:transformer} & Data & Soft\\
+    \hline
+\end{tabular}
+\label{table:taxonomy}
+\end{table}
 
 %\renewcommand\bibname{References\vspace*{10mm}}
 \newpage
