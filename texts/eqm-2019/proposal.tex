@@ -64,8 +64,6 @@
 
 \begin{document}
 
-% Escolha entre autor ou autora:
-%\documento{Research Project}
 
 \begin{titlepage}
     \logos
@@ -81,7 +79,6 @@
 	{\large \today\par}
 \end{titlepage}
 
-\newpage
 
 \begin{abstract}
     Attention is fundamental for intelligent beings.
@@ -98,36 +95,38 @@
 \end{abstract}
 
 \newpage
+\tableofcontents
+\newpage
 
 \section{Introduction}
 We continually receive high volumes of multimodal stimuli from both external sources
--- such as visual, auditive signals -- and internal sources -- proprioception, memories et cetera.
+-- such as visual, auditive signals -- and internal sources -- such as proprioception and memories.
 It would be very inefficient or even impossible to process all the information with
 the same intensity once a significant portion of it is irrelevant for
-the task executed at the moment and considering that we have limited cognitive capacity.
+the task executed at the moment and considering that we have limited actuation capacity.
 When we read, our vision does not focus on all
 words equally, but instead on a small subset of the text at a time.
-When we are addressing a given subject (in a `'train of thought''), it tends to mediate the focus
-in the memory search process, essentially retrieving memories that
-are useful whereas many other irrelevant memories are not used.
+When we are addressing a given subject (in a train of thought), it tends to mediate the focus
+in the memory search process, mostly retrieving memories that
+are useful, whereas many other irrelevant memories are not used.
 It often happens that something conspicuous
 -- such as a bird abruptly appearing in front of us or a sudden sound --
-quickly draws our focus, `'stealing'' it from what was previously being focused.
+quickly draws our focus, stealing it from what was previously being focused.
 The abilities to filter and select stimuli that are relevant for a task, to keep the focus for an
 extended period and to adequately direct mental processes is fundamental to
 human beings and other sophisticated forms of life.
-We name this set of abilities `'Attention''~\cite{ref:esther-thesis}.
+We name this set of abilities \textbf{Attention}~\cite{ref:esther-thesis}.
 
 Attention can potentially play an essential role in Artificial Intelligence (AI).
 The pursue of intelligent machines is an old effort in Computer Science~\cite{ref:turing} and is still very
 relevant today due to the potential to radically benefit society.
 Although there have been significant advancements in the field of AI, it is broadly accepted that
-machines still cannot perform certain complex tasks nearly as efficiently as humans or some animals and
+machines still cannot perform specific complex tasks nearly as efficiently as humans or some animals and
 the path to achieving more intelligence is still unclear, with many different proposals~\cite{ref:mikolov}.
-Part of the problem comes from the difficulty to properly define `'intelligence'' itself, but
+Part of the problem comes from the difficulty to accurately define intelligence itself, but
 surveys of the works on the subject~\cite{ref:aidef} suggest that a reasonably accepted
-the concept is the ability to perform elaborate tasks in complex and dynamic environments
-to achieve a wide variety of goals.
+concept is \emph{the ability to perform elaborate tasks in complex and dynamic environments
+to achieve a wide variety of goals}.
 From the narrow to the broader aspects of intelligence, the functionalities of Attention
 are of great importance -- and it increases
 as the level of intelligence considered increases~\cite{ref:helgason}.
@@ -143,7 +142,7 @@ to learn what features should be extracted (rather than relying on hand-crafted 
 Along with the transposition from classic models to DL
 approaches, an increasingly high number of works on the field
 have been using concepts related to Attention in combination with DL to achieve better results.
-One example is image captioning (figure \ref{fig:description}) where the task
+One example is image captioning (Figure \ref{fig:description}) where the task
 consists of giving a natural language description of a given image.
 The work presented in ~\cite{ref:img-captioning} shows that the task benefits from
 sequentially focusing on different parts of the image in a sequence,
@@ -167,10 +166,10 @@ These are evidence that concepts of Attention have indeed been useful for the fi
 \subsection{Motivation and Objectives}
 In spite of the recent adoption of Attention by a variety of Deep Learning models
 and the significant improvements it has shown, we conjecture that there are still many other tasks
-that is still not very well explored.
+that are still not explored.
 Current works also tend to focus more on the filtering functionality of Attention,
 but there are other aspects
--- such as the allocation of mental resources in the course of time -- that can be of potential benefit
+-- such as the allocation of mental resources over time -- that can be of potential benefit
 (we further discuss the taxonomy of Attention in following sections).
 Furthermore, we note that Attention models currently being used
 are very specific to each problem in question.
@@ -185,7 +184,7 @@ Therefore, the specific objectives of this work are:
     \item To identify specific problems in different classes
         (robotics, vision, natural language, program composition) with
         improvement potential through the use of Attention;
-    \item To propose and implement one or more solutions based on the findings of the work to
+    \item To propose and implement a solution based on the findings of the work to
         validate the ideas and evaluate them in an application.
     %\item To study the viability of generalization of Attention
     %    to broader areas in AI other than Deep Learning.
@@ -209,22 +208,19 @@ Throughout the years, Attention has been studied
 from various perspectives~\cite{ref:esther-thesis}
 such as philosophy, psychology, and neurology.
 There are multiple definitions of the concept.
-In the next items, we discuss some concrete aspects related to Attention.
+In the next items, we discuss some particular aspects related to Attention.
 
 \subsubsection{A definition}
 \label{sec:attdef}
 We can define Attention as
 \emph{the act of applying mental resources to selected stimuli following an allocation policy specific to
     a particular goal}.
-This rather broad definition captures well the main concepts related to Attention:
+This rather broad definition captures the main concepts related to Attention:
 in a world with virtually infinite
 \emph{stimuli} to select from the environment, agents with otherwise \emph{finite processing
 resources} (but with a variety of options of \emph{mental processes} to perform) must choose what their
 actions will be (and in which stimuli) in a \emph{correct sequential manner} and in \emph{sensible time}.
-As mentioned before, other works may define Attention in a different manner
-that is perhaps even conflicting with ours but
-these are the terms that we choose our work to be based on -- noting that they
-reasonably capture common concepts of interest by us and other works.~\cite{ref:helgason}
+As mentioned before, there is no commom definition of Attention and other works may define it differently. However, as we intend to work in a computational perspective, the terms that we chose to base our work on are those that reasonably capture common concepts of interest by us and other works ~\cite{ref:helgason}.
 
 \subsubsection{Functionalities of Attention}
 Attention can be manifested in different manners depending on the goal.
@@ -247,15 +243,15 @@ In bottom-up Attention, the act of focusing is involuntarily
 started and guided by (usually) external and conspicuous stimuli,
 such as a shattering glass that tends to
 make us immediately turn our heads towards where the noise origin.
-Another example is visual saliency (figure \ref{fig:saliency}):
+Another example is visual saliency (Figure \ref{fig:saliency}):
 a glowing red ball suddenly appearing in
 your field of vision will probably grab your focus.
-In top-down Attention, cognition and goals guide voluntarily the focus.
+In top-down Attention, cognition and goals guide the focus voluntarily.
 If we are talking to someone in a crowded party, for example,
 we focus on what the specific person is saying
 -- ignoring other people's words -- to maintain the conversation.
 
-\begin{figure}
+\begin{figure}[!htb]
 \begin{center}
         \begin{tabular} {cc}
         \includegraphics[width=0.35\linewidth]{./img/traffic_sign_s.jpg} &
@@ -290,12 +286,12 @@ Although DL was broadly adopted around 12 years ago,
 some of its concepts date to much earlier than that~\cite{ref:dl}:
 discussions about the foundations of artificial neural networks go back
 to the 1950s, the introduction of backpropagation to the 1970s
-and many other key concepts that are popular mostly in the last decade or less
+and many other vital concepts that are popular mostly in the last decade or less
 were introduced more than 30 years ago.
 Many fields of AI witnessed a significant shift in paradigm
 in the last years: models applying DL concepts now achieve state-of-the-art results in different problems regarding Computer Vision,
-audio processing, NLP, neural computation among others~\cite{ref:dl-book}.
-DL used both in supervised and unsupervised learning~\cite{ref:dl}.
+audio processing, NLP, neural computation, among others~\cite{ref:dl-book}.
+DL used in supervised, unsupervised and reinnforcement learning~\cite{ref:dl}.
 
 One of the critical concepts of DL is that of the hierarchy of features~\cite{ref:dl}:
 A deep sequence of layers apply non-linear transformations to the data
@@ -303,11 +299,11 @@ in such a way that many models learn to extract features of hierarchical
 levels of abstraction.
 For this reason, DL is also regarded as Representation Learning.
 This characteristic enables such models to learn the latent structure
-in intrinsically unstructured data such as images, text and audio signals.
+in intrinsically unstructured data such as images, text, and audio signals.
 Another advantage is that of transfer learning: models that are
 primarily trained for a given task can be used and adapted for another
 task while using at least part of the representations learned.
-We discuss some concepts related to DL in following items.
+We discuss some concepts related to DL in the following items.
 
 \subsubsection{Artificial Neural Networks}
 Artificial Neural Networks (ANNs) are usually adopted to predict
@@ -319,7 +315,7 @@ that will be briefly discussed here.
 
 One of the most basic examples is that of Multi-Layer Perceptrons (MLPs).
 The main characteristic of this model is the use of hidden layers
-and neurons are a linear combination of previous layers followed by
+and neurons that are a linear combination of previous layers followed by
 a non-linear activation.
 Each layer $l_k$ (with $n$ neurons) is connected to the previous layers
 $l_{k-1}$ (with $m$ neurons) and the neuron $l_k^i$, $1 \le i \le n$
@@ -336,7 +332,7 @@ $$
 ReLU is currently broadly adopted due to its high efficiency
 and training speed~\cite{ref:relu}.
 
-\begin{figure}
+\begin{figure}[!htb]
 \begin{center}
     \includegraphics[width=0.9\linewidth]{./img/cnn2.png}
 \caption{
@@ -350,7 +346,7 @@ and training speed~\cite{ref:relu}.
 \subsubsection{Convolutional Neural Networks}
 Convolutional Neural Networks (CNNs) are widely used in Computer Vision tasks such as image classification, localization, and semantic segmentation.
 CNNs use the fact that images tend to have correlated pixels and use
-convolution filters in an hierarchical manner (figure \ref{fig:cnn})
+convolution filters in an hierarchical manner (Figure \ref{fig:cnn})
 to learn features in increasing abstraction.
 For a certain layer, the $i$-th feature map $m_i$ is,
 given filter weights $W_i$, bias $b_i$ and nonlinearity function $h(x)$,
@@ -379,12 +375,12 @@ non-linearity $f(x)$ is given by:
 $$h_t = f\left(Wx_t + Uh_{t-1}\right)$$
 These architectures are widely used in NLP tasks such as
 machine translation~\cite{ref:rnn-nlp}.
-Some variations over the original basic architecture such as
+Some variations over the original underlying architecture such as
 LSTMs are also broadly adopted.
 
 \textbf{Modern architectures}
-Modern work on Deep Learning propose models of greater complexity than cited above.
-Some present completely novice architectures, but most of the work are a combination of basic neural networks architectures. The final results, however, may consist
+Recent work on Deep Learning propose models of greater complexity than cited before.
+Some present completely novice architectures, but most of the work are a combination of underlying neural networks architectures. The final results, however, may consist
 of entirely new contributions to new tasks.
 Some examples will be discussed in section \ref{sess:related-work}.
 
@@ -396,7 +392,7 @@ between the true value $y$ and the predicted value $\hat{y}$.
 Backpropagation~\cite{ref:backprop} plays an essential role in DL because it is used to adjust the weights $\theta$ of models that have a
 differentiable cost function.
 A typical training process is composed of a forward-propagation
-step which computes the predictions over a set of input samples
+a step which computes the predictions over a set of input samples
 and a backpropagation step which calculates the loss function
 and adjusts the weights of the model.
 In DL, common adjustment methods includes Gradient Descent (GD)~\cite{ref:gd} or variations
@@ -410,9 +406,9 @@ The topic of integrating Attention concepts into Deep Learning has been increasi
 in the community~\cite{ref:att-survey}.
 Augmenting the capabilities of neural network architectures with Attention has shown promising results
 in problems from a variety of fields in which Deep Learning is currently being applied to, such as
-Computer Vision, Natural Language Processing and differentiable programming in general.
+Computer Vision, Natural Language Processing, and differentiable programming in general.
 In this subsection, we address some recent works.
-We highlight how The authors used attention and how it affected the performance of the proposed models
+We highlight how the authors used attention and how it affected the performance of the proposed models
 on evaluation tasks.
 
 \subsection{Attention-based Encoder-Decoder Networks}
@@ -429,18 +425,16 @@ This allows the encoder-decoder for more flexibility to select the components of
 more relevance.
 The authors implemented and evaluated the method for several applications:
 \begin{itemize}
-    \item \emph{Image Caption Generation}: The goal of the task is to provide a natural language description
-        of an input image.
+    \item \emph{Image Caption Generation}: The goal of the task is to provide a natural language description of an input image.
         The proposed model uses a CNN as encoder and RNN as decoder -- with the attentional model in between.
         The model was ranked third in \emph{MS COCO Captioning Challenge} and provided highly interpretable
         results regarding the importance of the regions of the image to each component of the sentence
-        (see figure \ref{fig:description}).
+        (the model is depicted in Figure \ref{fig:description}).
     \item \emph{Neural Machine Translation}: The authors proposed an RNN architecture augmented with the Attention module, which provided a relative improvement of roughly 60\% when compared to the same model without Attention.
         The model also performs better than state of the art in some languages.
-        It was also possible to obtain a weight matrix that maps the importance of input to output words since the context set provides structural information of the input (see figure \ref{fig:ntatt}).
-    \item \emph{Neural Speech Recognition}: The goal of the task is to translate audio to text sentences by
-        using fully neural networks.
-        The proposed model uses RNNs between the Attention module and the model achieved state-of-the-art results in the TIMIT corpus~\cite{ref:timit} and the outputs provide Attention weights from
+        It was also possible to obtain a weight matrix that maps the importance of input to output words since the context set provides basic information of the input (Figure \ref{fig:ntatt}).
+    \item \emph{Neural Speech Recognition}: The goal of the task is to translate audio to text sentences by using fully neural networks.
+        The proposed model uses RNNs between the Attention module, and the model achieved state-of-the-art results in the TIMIT corpus~\cite{ref:timit} and the outputs provide Attention weights from
         the input signal to produced phonemes.
 \end{itemize}
 Overall, the proposed technique -- besides achieving state of the art results --
@@ -462,16 +456,16 @@ produces a semantic mapping from the input space to the output space even when t
 \subsection{Adaptive computation time for RNNs}
 Most of the current work uses Attention as a mechanism for filtering.
 The authors of the work in \cite{ref:act} propose an RNN augmented with an Attention module that allows the dynamic inference of many computation steps for each time step.
-It uses soft Attention to determine when to stop (see figure~\ref{fig:adaptive-comp}).
+It uses soft Attention to determine when to stop (Figure~\ref{fig:adaptive-comp}).
 The ability to allocate computational resources is an essential function of Attention.
 The authors show that the mechanism allowed for the model to achieve considerably superior results
 in tasks such as adding and sorting (when compared to a model without adaptive computation time)
-because the model was enabled to perform more or fewer operations depending on nature dynamically
+because the model was enabled to perform more or fewer operations depending on the dynamic allocation 
 of each step.
 The authors also tested the model in the problem of character prediction on the Hutter prize Wikipedia
 dataset~\cite{ref:hutter}, in which the model yielded insights into the structure of the input data.
 
-\begin{figure}
+\begin{figure}[!htb]
 \begin{center}
     \includegraphics[width=0.9\linewidth]{./img/adaptive_comp.png}
 \caption{
@@ -517,10 +511,10 @@ expensive to perform processing on images and widely used current models such as
 CNNs tend to require computational resources proportional to the number of pixels in the image.
 The work proposes a \emph{Recurrent Attention Model (RAM)}, a recurrent neural network augmented by
 an attentional component regarded as \emph{Glimpse Module} that is trained via Reinforcement Learning.
-The Glimpse Module enables the network to select a point in the image from which it extracts `'glimpses''
+The Glimpse Module enables the network to select a point in the image from which it extracts glimpses.
 -- patches of the image at different resolutions but with the same dimensions.
 These glimpses and the selected location are encoded and given as input to produce
-the new hidden state of the core RNN architecture (see figure \ref{fig:recurr-model}).
+the new hidden state of the core RNN architecture (Figure \ref{fig:recurr-model}).
 The dimensionality of the glimpse is much smaller than that of the image and furthermore does not depend
 on the dimensions of the input image.
 The authors evaluate the model for classification tasks in the MNIST~\cite{ref:mnist} dataset and variations
@@ -534,7 +528,7 @@ which reduces the adversary effect of clutter.
 Deep Learning techniques have been useful for perception tasks in the last years, but tasks that involve
 complex logic and reasoning are still a major challenge.
 Authors in \cite{ref:np} propose a model that learns to induce programs by composing basic logic operations
-into more complex ones in sequence (figure \ref{fig:np}).
+into more complex ones in sequence (Figure \ref{fig:np}).
 The model is differentiable and thus trainable via gradient descent because the authors use an Attention
 distribution at each step to select the operations to be used.
 The authors of the work evaluate the model on a synthetic table-comprehension dataset.
@@ -554,7 +548,7 @@ The model achieved nearly perfect accuracy and yielded superior performance comp
 
 \subsection{The Transformer architecture}
 For sequence modeling tasks such
-as machine translation, there is a massive use of sequence models such as RNNs and more specifically LSTMs.
+as machine translation, there is an extensive use of sequence models such as RNNs and more specifically LSTMs.
 The work proposed in \cite{ref:transformer} aims at overcoming some challenges inherent to such sequential
 models, such as performance and obstacles to applying parallelization to the process.
 Complications also arise when the content of the inputs are long (such as long sentences in the text) and
@@ -580,6 +574,9 @@ The proposed model achieved state of the art results on \emph{WMT 2014 English-t
 \let\clearpage\relax
 
 \section{Methodology}
+
+To achieve our goals, we will follow the methods described next.
+
 \subsection{Activities}
 \label{sec:activities}
 The work can be summarized in three main activities (or \textbf{phases}):
@@ -587,9 +584,9 @@ The work can be summarized in three main activities (or \textbf{phases}):
     \item \textbf{1. Literature Review}: an extensive survey on current uses of Attention in modern
         Deep Learning.
     \item \textbf{2. Proposal of an Attention framework for Deep Learning}: \
-        defining a component set of Attention elements currently used in Deep Learning design from results of previous phase and further survey.
-    \item \textbf{3. Implementation of Attention in Deep Learning}:
-        proposing of one or more models with components of Attention and evaluations on a set of tasks.
+        defining a component set of Attention elements currently used in Deep Learning design from results of the previous phase and further survey.
+    \item \textbf{3. Implementation and validation of Attention in Deep Learning}:
+        proposing a model with components of Attention and evaluating it on a set of tasks.
 \end{itemize}
 
 More specifically, the activities to be executed are:
@@ -601,7 +598,7 @@ More specifically, the activities to be executed are:
         -- extending what was discussed in subsection \ref{attention} --
         on which all later work will be based.
         It is worth noting that this theoretical framework is not necessarily the same as the framework
-        we propose to produce specifically for Deep Learning in phase 2.
+        we propose to produce specifically for Deep Learning in phase 2. It will work as the base that will be used to organize and classify the current literature.
 
     \item \textbf{A1.2 - Elaboration of survey:}
         Exploration of selected work under the point of view of the theoretical framework established
@@ -610,7 +607,7 @@ More specifically, the activities to be executed are:
         performance in the application domain and elaborate a critical evaluation.
 
     \item \textbf{A1.3 - Survey article writing:}
-        Writing of an article with results of phase $2$ to be sent to an appropriate journal.
+        Writing of an article with results of phase $2$ to be sent to an appropriate journal (ACM Computing Surveys).
 
     \item \textbf{A2.1 - Establishment of Attention components for specific Deep Learning domains:}
         From the theoretical framework obtained in \textbf{A1.1}
@@ -640,13 +637,13 @@ More specifically, the activities to be executed are:
     \item \textbf{A3.3 - Evaluation of experimental results:}
         We evaluate the results using established metrics for each experiment,
         elaborating discussions that include exciting aspects of the results in general and
-        comparisons between the theoretical predictions and the concrete outcomes.
+        comparisons between the theoretical predictions and tangible outcomes.
         It is worth noting that the metrics we'll use will vary depending on the specific problem,
-        but they will always be selected so as to reflect the improvement of the models with the use of
+        but they will always be selected to reflect the improvement of the models with the use of
         attention.
 
     \item \textbf{A3.4 - Experiments article writing:}
-        Writing of an article with results of phase $3$ to be sent to an appropriate conference.
+        Writing of an article with results of phase $3$ to submit for publication.
 \end{itemize}
 
 Other activities to be done related to the masters program are:
@@ -707,7 +704,7 @@ one and a half years.
 \section{Theoretical Framework for Attention}
 Activity \textbf{A0.1} (described in~\ref{sec:activities}) was successfully completed,
 resulting in a theoretical framework~\cite{ref:framework} for attention upon which we can build future work.
-This task is very important since we want to be as clear as possible regarding what we define as ``attention''.
+This task is essential since we want to be as clear as possible regarding what we define as attention.
 In the framework, we define a set of \emph{entities of interest} and the phenomenon of Attention in terms of
 its \emph{functionalities} and how it relates to the entities.
 An initial definition was given in~\ref{sec:attdef} -- we used part of it as a basis for the complete framework.
@@ -727,24 +724,23 @@ while the second aims at explaining \emph{how} Attention emerges.
 In this definition, we define a set of \emph{entities of interest} and the phenomenon of Attention in terms of
 its \emph{functionalities} and how it relates to the entities.
 
-\subsubsection{Why is our definition good?}
 We believe our definition encompasses what we generally (and intuitively) refer to as attention while being not too broad.
-Also, the definition is given in terms related to Computer Science so it’s functionality nicely translates to the domain,
-which is important since we (so far) intend to develop AI using computers as we know it today.
+Also, the definition is given in terms related to Computer Science, so it's  functionality translates to the domain,
+which is essential since we (so far) intend to develop AI using computers as we know it today.
 We may not encompass every aspect of Attention and even be conflicting with other definitions.
 However, this is the set of postulates that we think is the most precise and useful and thus this is
 what we choose to use for future work to be based on.
 
 \subsubsection{Entities}
-Below is the list of entities - or ``terms'' - we use in this work, along with a brief discussion of the meaning
+Below is the list of entities - orterms - we use in this work, along with a brief discussion of the meaning
 we give to each term in the context of this work.
 
 \begin{itemize}
     \item\textbf{Data:} information, stimuli. It may be internal or external. Examples: visual information, audio, memories.
-    \item\textbf{Program:} algorithm, sequence of computer (or mental) operations. Programs use data as input in order to carry out a sequence of operations that produces output data and/or actions.
+    \item\textbf{Program:} algorithm, sequence of computer (or mental) operations. Programs use data as input to carry out a sequence of operations that produces output data and/or actions.
     \item\textbf{Process:} the execution of a program on a specific data instance.
-    \item\textbf{Computer:} the executor of processes, the “brain”.
-    \item\textbf{Resource:} when not specified, we mean “computational resources”, e.g. CPU time.
+    \item\textbf{Computer:} the executor of processes, the brain.
+    \item\textbf{Resource:} when not specified, we mean computational resources, e.g., CPU time.
     \item\textbf{Time:} the flow of time.
     \item\textbf{World:} the external environment.
     \item\textbf{Agent:} the actor in the world.
@@ -756,14 +752,14 @@ we give to each term in the context of this work.
 \emph{Data}, \emph{programs} and \emph{processes} are virtually \emph{infinite}.
 Computational \emph{resources} and \emph{actions} are finite.
 \emph{Attention} is \emph{the system of allocating resources to processes}.
-In other words, \emph{attention} is the entity in \emph{agents} that, given \emph{context} and a set of \emph{processes},
+In other words, \emph{attention} is the entity in \emph{agent} that, given \emph{context} and a set of \emph{processes},
 \emph{allocates} \emph{resources} to execute each of them in order to \emph{produce} \emph{outputs} in form of \emph{data} and \emph{actions} in a \emph{correct sequential manner} and in \emph{sensible time} in order to reach \emph{goals}.
 
 \subsection{A model of Attention}
 We propose a model for the phenomenon of Attention.
 Following the definition given in subsection~\ref{sec:definition}, in our model we assume that Attention takes place in the context
-of a ``mind'' that behaves like a computer that executes processes: it processes inputs via algorithms to produce an output in discrete steps.
-We propose that \emph{Attention can emerge in any process} to be executed by such mind by means of \emph{a series of components} -- which we call \emph{attentional modules}. These modules can alter data being processed and the execution flow of the algorithm and provide the functionalities of Attention.
+of a mind that behaves like a computer that executes processes: it processes inputs via algorithms to produce an output in discrete steps.
+We propose that \emph{Attention can emerge in any process} to be executed by such mind employing \emph{a series of components} -- which we call \emph{attentional modules}. These modules can alter data being processed and the execution flow of the algorithm and provide the functionalities of Attention.
 
 \begin{figure}[H]
     \centering
@@ -787,7 +783,7 @@ The module produces as \emph{output} (as a function of both inputs):
 \end{itemize}
 
 \subsubsection{Focus output}
-The focus output is the main element of the module: it can be used to allocate \emph{finite resources} to a set of ``candidate targets'' by giving them an ``importance score'' which can be used in any arbitrary way in following steps -- such as choosing the amount of computation to be dedicated to an element or which elements will be used as input to another step.
+The focus output is the main element of the module: it can be used to allocate \emph{finite resources} to a set of candidate targets by giving them an importance score which can be used in any arbitrary way in following steps -- such as choosing the amount of computation to be dedicated to an element or which elements will be used as input to another stage.
 Each element $\alpha_{tk}$ is respective to a target element $\tau_{tk}$.
 Target elements ($\tau \in T$) may effectively be \emph{programs} (tasks) or \emph{data}.
 
@@ -809,7 +805,7 @@ The focus function output may be used for the allocation of some resource in var
 \end{itemize}
 
 \subsubsection{Modules forming an attentional system}
-A system with Attention may contain more than one attentional modules -- even in a recursive manner.
+A system with Attention may contain more than one attentional module -- even in a recursive manner.
 Together, these modules always perform the function to allocate resources to
 processes.
 
@@ -827,13 +823,13 @@ Also, their sets of inputs and outputs may differ.
 \end{figure}
 
 \subsection{Validating the framework}
-In this subsection, we investigate some recent works on attention and see how they fit in our framework.
+In this subsection, we investigate some recent work on attention to evaluate how they would fit in our framework.
 
 \subsubsection{Image Caption Generation}
-The work~\cite{ref:show-attend-tell} is among the first to propose using
+The work described in ~\cite{ref:show-attend-tell} is among the first to propose using
 attention to image caption generation: the encoding of the input image is
 represented as a set of vectors -- each respective to a certain spatial region of the image --
-and the attentional component gives weights to each vector at each step in order to produce another
+and the attentional component gives weights to each vector at each step to produce another
 vector to be used in further computations.
 
 \begin{figure}[H]
@@ -843,18 +839,17 @@ vector to be used in further computations.
 \label{fig:cap}
 \end{figure}
 
-Figure~\ref{fig:cap} illustrates the model proposed in the work.
-The steps that calculate the attention to each encoding vector can be ``encapsulated'' as
-an attentional module under our modeling:
+Figure~\ref{fig:cap} illustrates the model proposed in this work.
+The steps that calculate the attention to each encoding vector can be encapsulated as an attentional module under our modeling:
 $a$, the input image encoding, is the \emph{focus target input} $\tau_t$,
 $h_{t-1}$, the hidden state of the model LSTM, is the \emph{outer state input} $o_t$
 and $\alpha_t$, the weights given to each encoding vector, is the \emph{focus output}. In this case, $A = [0, 1]$.
 Note that, in this case, the \emph{internal state} is empty.
 
 \subsubsection{Adaptive Computation Time}
-The work~\cite{ref:act} proposes an RNN that can perform a variable number of computation ``sub-steps'' for each time step $t'$.
-The main idea is to calculate an amount $0 \le p_{t',t} \le 1$ to be ``spend'' for each computation sub-step $t$ up until the
-moment the total spent reaches the ``budget'' of $1$ (in which moment the computation is halted).
+The work~\cite{ref:act} proposes an RNN that can perform a variable number of computation sub-steps for each time step $t'$.
+The main idea is to calculate an amount $0 \le p_{t',t} \le 1$ to be spend for each computation sub-step $t$ up until the
+moment the total spent reaches the budget of $1$ (in which moment the computation is halted).
 The final value $y_{t'}$ is computed as an weighted average of the intermediate $y_{t',t}$ values and the weights are the values
 $p_{t',t}$.
 
@@ -866,7 +861,7 @@ $p_{t',t}$.
 \end{figure}
 
 Figure~\ref{fig:act} illustrates the model proposed in the work.
-The proposed model can be thought as having two attention modules:
+The proposed model can be thought of as having two attention modules:
 \begin{itemize}
     \item \textbf{$ATT_{budget}$}, which computes the value $0 \le p_{t',t} \le 1$ to be spent at a given sub-step.
         In this analogy, $s_{t',t}$ -- the state of the RNN cell -- is the \emph{outer state} $o_t$;
@@ -884,12 +879,12 @@ The proposed model can be thought as having two attention modules:
 
 It is interesting to note that an effect that emerges from these two blocks is that
 \emph{the model can allocate resources to processes} both by
-\emph{choosing the data to use} (in the computation of each $y_t$ weighted by a focus output)
+\emph{choosing the data to use} (in the computation of each $y_t$ weighted by a focused output)
 and \emph{choosing the amount of computation time to use}.
 
 \subsubsection{Recurrent Attention Model of Visual Attention}
 The work~\cite{ref:rec-models} proposes a general recurrent model that uses visual attention at each step
-by selecting a ``retina-like'' representation of a portion of the input image to carry out further computations.
+by selecting a retina-like representation of a portion of the input image to carry out further computations.
 At each time step $t$, the model uses the selected location $l_{t-1}$ to extract a retina-like representation
 from input image.
 An arbitrary action $a_t$ can be executed to possibly alter the environment.
@@ -942,15 +937,14 @@ which we summarize below:
         ``attentive'' or ``attentional''
 \end{itemize}
 
-The relevance of each work was confirmed upon reading of the abstract.
+The relevance of each work was confirmed upon the reading of the abstract.
 As a result, we collected around 300 papers.
 
 \subsection{Literature Visualizations}
 Some visualizations were generated for the works collected with the intent
 to have some insights regarding the collection acquired.
 Some visualizations generated were: Citations graph (authors and works),
-Abstract/title word frequencies, Frequency of attention-themed papers over years,,
-Relative Frequency of attention-themed papers over years for some databases (arXiv, CVPR, DBLP).
+Abstract/title word frequencies, Frequency of attention-themed papers over the years. Relative Frequency of attention-themed papers over years for some databases (arXiv, CVPR, DBLP).
 Visualizations were generated by a set of scripts which can be found at \url{https://github.com/erikperillo/litrev}.
 One example of visualization is figure~\ref{fig:citations}.
 
@@ -967,13 +961,12 @@ One example of visualization is figure~\ref{fig:citations}.
 \subsection{Paper relevance analysis}
 With the collection in hands, the next goal was to assess the relevance and problem domain of each work
 via a paper relevance analysis~\cite{ref:paper-relevance}.
-To each work, we attributed the citation count, domains (e.g. Computer Vision), subdomains (e.g. image classification)
-and an ``impact'' score ranging from 1 to 5. This score was assessed in a quick and rough manner via the abstract of each
-work and it was given based on criteria such as:
+To each work, we attributed the citation count, domains (e.g., Computer Vision), subdomains (e.g., image classification), and an impact score ranging from 1 to 5. This score was assessed in a quick and rough manner via the abstract of each
+work, and it was given based on criteria such as:
 \begin{itemize}
     \item How innovative is the proposed model(s) of the work?
     \item How general is the proposed model(s)?
-    \item Does the proposed model(s) achives/surpasses state-of-the-art in some task?
+    \item Does the proposed model(s) archives/surpasses state-of-the-art in some task?
     \item Is attention a central component to the results of the work?
 \end{itemize}
 
@@ -981,12 +974,12 @@ work and it was given based on criteria such as:
 This step (which is in progress) aims at reading each paper of the collection in depth
 (in order of relevance, from highest to lowest) and generating a summary for each work.
 A summary template was formulated~\cite{ref:paper-anal-template} and summaries were generated for some works.
-This is the main step of the survey and it's expected to be the longest.
-The goal is to further refine our theoretical framework and guide the reading of future papers as we read those papers
+This is the main step of the survey, and it is expected to be the longest.
+The goal is to further refine our theoretical framework and to guide the reading of future papers as we read those papers
 -- in an iterative manner.
 Survey has shown so far that the use of attention in Deep Learning has indeed provided improvements in basically all
 subfields of DL.
-Table~\ref{table:taxonomy} shows the taxonomy classification for some of the most relevant works analyzed so far in the survey.
+Table~\ref{table:taxonomy} shows the taxonomy classification for some of the most important works analyzed so far in the survey.
 
 \begin{table}[H]
 \centering
