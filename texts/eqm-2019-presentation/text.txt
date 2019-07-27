@@ -1,0 +1,63 @@
+outline:
+introduction (4.5min):
+    - beautiful story (2min)
+    - motivation and objectives (1min)
+background (6min):
+    - attention main concepts (2min)
+    - related work (3min):
+        - attention-based encoder-decoder networks (1min)
+        - recurrent attention model (1min)
+        - adaptive computation time for rnns (1min)
+methodology (1 min):
+    - activities (2min)
+    - schedule (1min)
+work so far (10 min):
+    - theoretical framework for attention (7min):
+        - definition (2min)
+        - model (5min)
+    - literature review (3min)
+    - next steps (0min)
+
+text:
+introduction:
+    - beautiful story:
+        A todo momento temos uma grande quantidade de informação a disposição.
+        Tanto estímulos externos (visuais, auditivos) quanto internos (possíveis pensamentos, memórias).
+        Ao mesmo tempo, nosso cérebro tem uma capacidade limitada de processamento - 
+        assim como temos uma quantidade limitada de ações que podemos realizar a cada momento.
+
+        Nós e muitos outros seres vivos lidamos com isso usando apenas o que é relevante:
+        Quando lemos, não focamos em todas as palavras de uma vez, mas sim uma de cada vez em sequência.
+        Quando estamos tratando de um assunto, focamos em uma "linha de pensamento", e usando as memórias necessárias.
+
+        Em suma, as habilidades de filtrar e selecionar estímulos relevantes, manter foco em uma tarefa por tempo adequado -
+        ou seja, de direcionar processos mentais em geral são fundamentais para nós e outras formas de vida.
+        A essa habilidade, damos o nome de atenção.
+
+        Acreditamos que atenção tem um papel fundamental para inteligência.
+        Assim, atenção também tem um papel fundamental para AI.
+        Dos aspectos mais específicos aos mais gerais de inteligência,
+        as funcionalidades de atenção tem uma grande importância.
+
+        Grande parte dos significativos avanços recentes em AI vem da popularização de Deep Learning,
+        que é basicamente do uso de arquiteturas de redes neurais artificiais profundas.
+        DL tem provido resultados excelentes, sendo atualmente a técnica dominante em uma variedade de tarefas em Visão Computacional, Processamento de Linguagem Natural, robótica entre outros.
+
+        Uma tendência que tem se observado nos últimos anos é o uso de conceitos relacionados a atenção a Deep Learning, muitas vezes dando resultados muito positivos.
+
+        Um exemplo é o de geração automática de legenda de imagens.
+        Um trabalho mostra que a tarefa beneficia-se do uso de um componente atencional pro foco sequencial em partes diferentes da imagem para a geração de cada parte da frase - o que é intuitivo.
+
+        Vemos que o número de trabalhos relacionados a atenção e Deep Learning vem crescido rapidamente.
+        Tudo isso é evidência que atenção tem de fato sido útil à área.
+
+    - motivation and objectives:
+        Apesar da recente adoção de atenção por muitos modelos de DL e os ganhos de desempenho apresentados, acreditamos que há tarefas que ainda não foram devidamente exploradas com o uso do conceito.
+        Acreditamos que há outros aspectos de atenção a serem mais explorados, como por exemplo a alocação de "recursos mentais" no curso temporal
+        Também notamos que atenção tem sido usada de forma específica a cada tarefa e conjecturamos que é possível trazer um certo nível de generalização.
+
+        Resumindo, a principal contribuição que pretendemos trazer com este trabalho é:
+        Estabelecer um arcabouço para aplicação de atenção a Deep Learning de modo a guiar futuro desenvolvimento na área.
+
+        Os objetivos específicos deste trabalho são:
+        ...
