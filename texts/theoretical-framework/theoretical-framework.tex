@@ -88,23 +88,95 @@ Computational \emph{resources} and \emph{actions} are finite.
 In other words, \emph{attention} is the entity in \emph{agents} that, given \emph{context} and a set of \emph{processes},
 \emph{allocates} \emph{resources} to execute each of them in order to \emph{produce} \emph{outputs} in form of \emph{data} and \emph{actions} in a \emph{correct sequential manner} and in \emph{sensible time} in order to reach \emph{goals}.
 
-\section{A model of Attention}
+\section{How Attention happens?}
 We propose a model for the phenomenon of Attention.
-Following the definition given in section~\ref{sec:definition}, in our model we assume that Attention takes place in the context
+Following the definition given in Section~\ref{sec:definition}, in our model we assume that Attention takes place in the context
 of a ``mind'' that behaves like a computer that executes processes: it processes inputs via algorithms to produce an output in discrete steps.
-We propose that \emph{Attention can emerge in any process} to be executed by such mind by means of \emph{a series of components} -- which we call \emph{attentional modules}. These modules can alter data being processed and the execution flow of the algorithm and provide the functionalities of Attention.
+
+We believe Attention can be modeled as a process that takes place \emph{along the course of time}.
+At each time step in the process, \emph{inputs} of different classes are used to produce a certain \emph{output}.
+In a given \emph{timeframe}, the sequence of processing steps produce the emergence of \emph{focus}.
+In this section, we approach the entities and taxonomy related to the \emph{end-to-end} process itself.
+In the next section, we specifically model processing at each time step so that the processes described in this section emerge.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\linewidth]{./img/alt_att_block.pdf}
-    \label{fig:attmodule}
+    \includegraphics[width=1.0\linewidth]{./img/att_flow.pdf}\label{fig:attflow}
+    \caption{The process of Attention.}
+\end{figure}
+
+\subsection{Input dimensions}
+The information to be used by the focus may be classified as:
+\begin{itemize}
+    \item \textbf{Context}: Context for the focus to happen. It may be either \emph{internal} or \emph{external}.
+    \item \textbf{Focus target}: Subjects of the focus.
+\end{itemize}
+
+\subsection{Focus dimensions}
+\subsubsection{Continuity}
+The continuity of focus can be either:
+\begin{itemize}
+    \item \textbf{Soft}: Continuously spread accross the targets, ``weighting''.
+    \item \textbf{Hard}: Discrete selection of one or more targets.
+\end{itemize}
+This division has been popular in Deep Learning research lately.
+
+\subsubsection{Flow along time}
+The flow of focus along time can be classified as:
+\begin{itemize}
+    \item \textbf{Selective}: Selection of targets from the space of possible targets. The most common.
+    \item \textbf{Oriented}: Changing the focus targets in a sequential manner so as to perform a task.
+    \item \textbf{Sustained}: Keeping the focus on a set of targets along a period of time.
+    \item \textbf{Divided}: Dividing focus accross a set of targets.
+\end{itemize}
+
+\subsubsection{Focus Targets}
+The type of focus target may be:
+\begin{itemize}
+    \item \textbf{Computing} resources: Selection of computation time for a given task.
+    \item \textbf{Program}: Selection of a program among others to be executed.
+    \item \textbf{Data}: Selection of data (mostly stimuli). The selection of data may be:
+    \begin{itemize}
+        \item \textbf{Feature-based}: based on the features of a stimuli, such as color, orientation...
+        \item \textbf{Location-based}: based on the location of the stimuli, such as the coordinates of a pixel.
+        \item \textbf{Object-based}: based on a object (object may vary in the context of the task), such as a person in an image.
+    \end{itemize}
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{./img/taxonomy.pdf}\label{fig:taxonomy}
+    \caption{Focus attributes.}
+\end{figure}
+
+\subsection{Examples}
+\subsubsection{Image captioning with attention}
+The work on \cite{ref:img-captioning} proposes a recurrent neural network with attention for image captioning.
+While there are many abstract processing substeps in the process, the \emph{end-to-end} effect is that of
+a focus with \emph{soft} continuity, with \emph{selective} and \emph{orienting} flow, targetting \emph{data}
+on a \emph{Location-based} manner. Figure~\ref{fig:imgcaptioning} illustrates the proposed model.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{./img/img_captioning.png}\label{fig:imgcaptioning}
+    \caption{Diagram of natural language image description using Attention
+    (from \cite{ref:img-captioning}).}
+}
+\end{figure}
+
+\section{Attentional Module}
+We propose that \emph{Attention can emerge in any process} to be executed by such mind by means of \emph{a series of components} --- which we call \emph{attentional modules}. These modules can alter data being processed and the execution flow of the algorithm and provide the functionalities of Attention.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{./img/alt_att_block.pdf}\label{fig:attmodule}
     \caption{Attentional module.}
 \end{figure}
 
 Figure~\ref{fig:attmodule} illustrates the attentional module. At each time step $t$, the module receives as \emph{input}:
 \begin{itemize}
     \item Current \emph{outer state} $o_t \in O$, where $O$ is the \emph{outer state set}.
-    \item Group of \emph{focus targets} $\tau_t = \{\tau_{t1}, ..., \tau_{tk}\}, \tau_{ti} \in T$,
+    \item Group of \emph{focus targets} $\tau_t = \{\tau_{t1}, \ldots, \tau_{tk}\}, \tau_{ti} \in T$,
         where $T$ is the \emph{focus target set}.
     \item Past \emph{inner state} $\iota_{t-1} \in I$, where $I$ is the \emph{inner state set}.
 \end{itemize}
@@ -112,7 +184,7 @@ Figure~\ref{fig:attmodule} illustrates the attentional module. At each time step
 The module produces as \emph{output} (as a function of both inputs):
 \begin{itemize}
     \item Current \emph{inner state} $\iota_t \in I$.
-    \item Current \emph{focus output} $\alpha_t = \{\alpha_{t1}, ..., \alpha_{tk}\}, \alpha_{ti} \in A$,
+    \item Current \emph{focus output} $\alpha_t = \{\alpha_{t1}, \ldots, \alpha_{tk}\}, \alpha_{ti} \in A$,
         where $A$ is the \emph{focus output set}.
 \end{itemize}
 
