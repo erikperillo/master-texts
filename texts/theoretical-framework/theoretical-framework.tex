@@ -26,8 +26,8 @@
 	\vspace{3.5cm}
 	{\huge\bfseries A theoretical framework for Attention\par}
 	\vspace{1cm}
-	{\itshape Erik de Godoy Perillo\par}
-	{\itshape Advisor: Profa. Dra. Esther Luna Colombini\par}
+	{\itshape~Erik de Godoy Perillo\par}% chtex 6
+    {\itshape~Advisor: Profa. Dra. Esther Luna Colombini\par}% chtex 6
 	\vspace{0.5cm}
 	\vfill
 	State University of Campinas
@@ -65,7 +65,7 @@ However, this is the set of postulates that we think is the most precise and use
 what we choose to use for future work to be based on.
 
 \subsection{Entities}
-Below is the list of entities - or ``terms'' - we use in this work, along with a brief discussion of the meaning
+Below is the list of entities --- or ``terms'' --- we use in this work, along with a brief discussion of the meaning
 we give to each term in the context of this work.
 
 \begin{itemize}
@@ -88,12 +88,26 @@ Computational \emph{resources} and \emph{actions} are finite.
 In other words, \emph{attention} is the entity in \emph{agents} that, given \emph{context} and a set of \emph{processes},
 \emph{allocates} \emph{resources} to execute each of them in order to \emph{produce} \emph{outputs} in form of \emph{data} and \emph{actions} in a \emph{correct sequential manner} and in \emph{sensible time} in order to reach \emph{goals}.
 
-\section{How Attention happens?}
-We propose a model for the phenomenon of Attention.
-Following the definition given in Section~\ref{sec:definition}, in our model we assume that Attention takes place in the context
-of a ``mind'' that behaves like a computer that executes processes: it processes inputs via algorithms to produce an output in discrete steps.
+\section{How does Attention happen?}\label{sec:taxonomy}
+As mentioned in Section~\ref{sec:definition},
+in this work we summarize Attention as \emph{the allocation of computing resources to processes}.
+Thus, when attention is taking place, the system is directing its \emph{computing time budget} to certain \emph{programs} which,
+in turn, are being run with some subset of the possible \emph{data} as input.
+We name this selection process \emph{focus}.
 
-We believe Attention can be modeled as a process that takes place \emph{along the course of time}.
+In some instances, some of the entities may not be subject to focus, thus remaining fixed.
+There may be, for example, systems in which the program to be run and the computing resources are fixed and attention's role
+is to just select which data to be used.
+Another example is when both the program and the input data are fixed and Attention just selects how much computation time
+should be dedicated to the process at a given time window.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{./img/mind.pdf}\label{fig:mind}
+    \caption{High level overview of the focus phenomenon. Focus is responsible for selecting computation resources for programs and also data to be used by the programs.}
+\end{figure}
+
+The attention process takes place \emph{along the course of time}.
 At each time step in the process, \emph{inputs} of different classes are used to produce a certain \emph{output}.
 In a given \emph{timeframe}, the sequence of processing steps produce the emergence of \emph{focus}.
 In this section, we approach the entities and taxonomy related to the \emph{end-to-end} process itself.
@@ -121,25 +135,28 @@ The continuity of focus can be either:
 \end{itemize}
 This division has been popular in Deep Learning research lately.
 
-\subsubsection{Flow along time}
+\subsubsection{Flow}
 The flow of focus along time can be classified as:
 \begin{itemize}
-    \item \textbf{Selective}: Selection of targets from the space of possible targets. The most common.
-    \item \textbf{Oriented}: Changing the focus targets in a sequential manner so as to perform a task.
-    \item \textbf{Sustained}: Keeping the focus on a set of targets along a period of time.
-    \item \textbf{Divided}: Dividing focus accross a set of targets.
+    \item \textbf{Ephemeral}: Selection of subjects in the context of a short time window, such as salience.
+    \item \textbf{Enduring}: Selection of subjects in the context of a long time window. It can be of the following types:
+    \begin{itemize}
+        \item \textbf{Oriented}: An arbitrary focus sequence so as to complete a certain task.
+        \item \textbf{Sustained}: Focus restrained to a subset of the targets.
+        \item \textbf{Divided}: Focus alternating among a subset of the targets.
+    \end{itemize}
 \end{itemize}
 
-\subsubsection{Focus Targets}
-The type of focus target may be:
+
+\subsubsection{Subject}
+The subject of the focus (i.e.\ the target type) may be:
 \begin{itemize}
     \item \textbf{Computing} resources: Selection of computation time for a given task.
     \item \textbf{Program}: Selection of a program among others to be executed.
-    \item \textbf{Data}: Selection of data (mostly stimuli). The selection of data may be:
+    \item \textbf{Data}: Selection of data (mostly stimuli). Examples of the nature of such date are:
     \begin{itemize}
-        \item \textbf{Feature-based}: based on the features of a stimuli, such as color, orientation...
+        \item \textbf{Feature-based}: based on the features of a stimuli, such as color, orientation\ellipsis\
         \item \textbf{Location-based}: based on the location of the stimuli, such as the coordinates of a pixel.
-        \item \textbf{Object-based}: based on a object (object may vary in the context of the task), such as a person in an image.
     \end{itemize}
 \end{itemize}
 
@@ -149,23 +166,16 @@ The type of focus target may be:
     \caption{Focus attributes.}
 \end{figure}
 
-\subsection{Examples}
-\subsubsection{Image captioning with attention}
-The work on \cite{ref:img-captioning} proposes a recurrent neural network with attention for image captioning.
-While there are many abstract processing substeps in the process, the \emph{end-to-end} effect is that of
-a focus with \emph{soft} continuity, with \emph{selective} and \emph{orienting} flow, targetting \emph{data}
-on a \emph{Location-based} manner. Figure~\ref{fig:imgcaptioning} illustrates the proposed model.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{./img/img_captioning.png}\label{fig:imgcaptioning}
-    \caption{Diagram of natural language image description using Attention
-    (from \cite{ref:img-captioning}).}
-}
-\end{figure}
+\subsubsection{Using the result of the focus}
+The focus may be used for the allocation of some resource in various ways, such as:
+\begin{itemize}
+    \item Choosing the \textbf{amount} of \textbf{computation time} to be used at a certain step;
+    \item Choosing a \textbf{subset} of \textbf{elements} to carry out further computations;
+    \item \textbf{Weighting elements} to perform a certain computation.
+\end{itemize}
 
 \section{Attentional Module}
-We propose that \emph{Attention can emerge in any process} to be executed by such mind by means of \emph{a series of components} --- which we call \emph{attentional modules}. These modules can alter data being processed and the execution flow of the algorithm and provide the functionalities of Attention.
+We propose that the process of Attention --- as discussed in Section~\ref{sec:taxonomy}  --- can emerge by means of \emph{a series of components} --- which we call \emph{attentional modules}. These modules can alter data being processed and the execution flow of the algorithm and provide the functionalities of Attention.
 
 \begin{figure}[H]
     \centering
@@ -188,43 +198,37 @@ The module produces as \emph{output} (as a function of both inputs):
         where $A$ is the \emph{focus output set}.
 \end{itemize}
 
-\subsection{Focus output}
-The focus output is the main element of the module: it can be used to allocate \emph{finite resources} to a set of ``candidate targets'' by giving them an ``importance score'' which can be used in any arbitrary way in following steps -- such as choosing the amount of computation to be dedicated to an element or which elements will be used as input to another step.
+The focus output is the main element of the module: it can be used to allocate \emph{finite resources} to a set of ``candidate targets'' by giving them an ``importance score'' which can be used in any arbitrary way in following steps.
 Each element $\alpha_{tk}$ is respective to a target element $\tau_{tk}$.
-Target elements ($\tau \in T$) may effectively be \emph{programs} (tasks) or \emph{data}.
 
-\subsubsection{Soft and Hard Attention}
-The focus output will generally be such that it acts as either \emph{Soft} or \emph{Hard Attention}:
+\subsection{Modules forming an attentional system}
+A system with Attention may contain more than one attentional modules --- even in a recursive manner.
+Together, these modules always perform the function to provide focus
+as discussed in Section~\ref{sec:taxonomy}.
+We now provide some examples of how the attentional modules can act to provide such functionalities.
+
+\subsubsection{Soft and Hard focus}
+The different focus continuities can be obtained by means of attentional modules in the following manner:
 \begin{itemize}
-    \item \textbf{Soft Attention:}
+    \item \textbf{Soft Focus}:
         $A = [0, 1]$, with $0 \le \sum_{i=1}^{k} \alpha_{ti} \le 1$
-    \item \textbf{Hard Attention:}
+    \item \textbf{Hard Focus}:
         $A = \{0, 1\}$, with $0 \le \sum_{i=1}^{k} \alpha_{ti} \le M$ and $0 \le M \le |\tau_t|$
 \end{itemize}
 
-\subsubsection{Using the output of the focus function}
-The focus function output may be used for the allocation of some resource in various ways, such as:
-\begin{itemize}
-    \item Choosing the \textbf{amount} of \textbf{computation time} to be used at a certain step;
-    \item Choosing a \textbf{subset} of \textbf{elements} to carry out further computations;
-    \item \textbf{Weighting elements} to perform a certain computation.
-\end{itemize}
-
-\subsection{Modules forming an attentional system}
-A system with Attention may contain more than one attentional modules -- even in a recursive manner.
-Together, these modules always perform the function to allocate resources to
-processes.
-
+\subsubsection{Example of an entire system}
 Figure~\ref{fig:attsystem} shows the diagram of a possible system with attention.
 The module \emph{TaskATT} uses hard attention to select a certain task $k$ to be executed for some time at time step $t$.
-Among the computations of task $k$, there is the module \emph{DataATT}, uses soft attention to allocate resources to a set of items.
+Among the computations of task $k$, there is the module \emph{DataATT}, which uses soft attention to allocate resources to a set of items.
 It is worth noting that time is relative to each attentional module: \emph{TaskATT} has a temporal course over time steps $t$ that is different from that of \emph{DataATT}, which is over time steps $t'$.
 Also, their sets of inputs and outputs may differ.
+Together, these modules provide two types of focus:
+\emph{hard}, \emph{enduring}/\emph{oriented} focus on \emph{programs} and
+\emph{soft}, \emph{ephemeral} focus on data.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{./img/att_blocks_example.pdf}
-    \label{fig:attsystem}
+    \includegraphics[width=0.7\linewidth]{./img/att_blocks_example.pdf}\label{fig:attsystem}
     \caption{Example of a system that uses attention.}
 \end{figure}
 
@@ -234,14 +238,24 @@ In this section, we investigate some recent works on attention and see how they 
 \subsection{Image Caption Generation}
 The work~\cite{ref:show-attend-tell} is among the first to propose using
 attention to image caption generation: the encoding of the input image is
-represented as a set of vectors -- each respective to a certain spatial region of the image --
+represented as a set of vectors --- each respective to a certain spatial region of the image ---
 and the attentional component gives weights to each vector at each step in order to produce another
 vector to be used in further computations.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{./img/captioning.pdf}
-    \label{fig:captioning}
+    \includegraphics[width=0.8\linewidth]{./img/img_captioning.png}\label{fig:imgcaptioning}
+    \caption{Diagram of natural language image description using Attention
+    (from~\cite{ref:img-captioning}).}
+\end{figure}
+
+While there are many abstract processing substeps in the process, the \emph{end-to-end} effect is that of
+a focus with \emph{soft} continuity, with \emph{enduring} and \emph{orienting} flow, targetting \emph{data}
+on a \emph{Location-based} manner. Figure~\ref{fig:imgcaptioning} illustrates the proposed model.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{./img/captioning.pdf}\label{fig:captioning}
     \caption{Model proposed for image captioning in~\cite{ref:show-attend-tell} with attentional module.}
 \end{figure}
 
@@ -262,8 +276,17 @@ $p_{t',t}$.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\linewidth]{./img/act.pdf}
-    \label{fig:act}
+    \includegraphics[width=0.8\linewidth]{./img/adaptive_comp.png}\label{fig:act}
+    \caption{Adaptive computation time process illustration.}
+\end{figure}
+
+The attention component provides two types of focus:
+The selection of computing substeps at each step can be thought as a focus flow with \emph{hard} continuity, \emph{enduring}/\emph{oriented} signature and \emph{computing} as focus target.
+The computation of the result of each step uses \emph{soft} focus of \emph{ephemeral} signature and \emph{data} as focus target.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\linewidth]{./img/act.pdf}\label{fig:act}
     \caption{Model proposed for image captioning in~\cite{ref:act} with attentional module.}
 \end{figure}
 
@@ -271,8 +294,8 @@ Figure~\ref{fig:act} illustrates the model proposed in the work.
 The proposed model can be thought as having two attention modules:
 \begin{itemize}
     \item \textbf{$ATT_{budget}$}, which computes the value $0 \le p_{t',t} \le 1$ to be spent at a given sub-step.
-        In this analogy, $s_{t',t}$ -- the state of the RNN cell -- is the \emph{outer state} $o_t$;
-        $\psi_t$ -- a dummy element representing the current computation sub-step -- is the \emph{target} $\tau_t$;
+        In this analogy, $s_{t',t}$ --- the state of the RNN cell --- is the \emph{outer state} $o_t$;
+        $\psi_t$ --- a dummy element representing the current computation sub-step --- is the \emph{target} $\tau_t$;
         and $i_{t',t}$ is the \emph{inner state}.
         The \emph{focus output} $p_{t',t}$, besides representing values to be consumed from the budget,
         can be thought of as an importance weight for the final output $y_t$, since the produced values are used to computed
@@ -280,14 +303,9 @@ The proposed model can be thought as having two attention modules:
     \item \textbf{$ATT_{halt}$}, which computes the value $c_{t',t} \in \{0, 1\}$, which is $1$ if the cell should continue
         further sub-steps and $0$ otherwise.
         In this analogy, $p_{t',t}$ is the \emph{outer state} $o_t$;
-        $\psi_t$ -- a dummy element representing the current computation sub-step -- is the \emph{target} $\tau_t$;
+        $\psi_t$ --- a dummy element representing the current computation sub-step --- is the \emph{target} $\tau_t$;
         and $j_{t',t}$ is the \emph{inner state}.
 \end{itemize}
-
-It is interesting to note that an effect that emerges from these two blocks is that
-\emph{the model can allocate resources to processes} both by
-\emph{choosing the data to use} (in the computation of each $y_t$ weighted by a focus output)
-and \emph{choosing the amount of computation time to use}.
 
 \subsection{Recurrent Attention Model of Visual Attention}
 The work~\cite{ref:ram} proposes a general recurrent model that uses visual attention at each step
@@ -298,8 +316,16 @@ An arbitrary action $a_t$ can be executed to possibly alter the environment.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{./img/ram.pdf}
-    \label{fig:ram}
+    \includegraphics[width=1.0\linewidth]{./img/ram.png}
+    \caption{General recurrent architecture proposed in~\cite{ref:ram}.}
+\end{figure}
+
+The attention component in the proposed model can be thought as providing
+\emph{hard}, \emph{enduring}/\emph{oriented} focus to \emph{data} in a \emph{location-based} manner.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{./img/ram.pdf}\label{fig:ram}
     \caption{General recurrent architecture proposed in~\cite{ref:ram} with attentional module.}
 \end{figure}
 
@@ -308,11 +334,27 @@ In this representation, the hidden state of the RNN $h_t$ is the \emph{outer sta
 The set of possible pixel coordinates $\{(i, j): i \in [H], j \in [W]\}$ (with $H, W$ as the height, width of the image)
 is the \emph{focus targets} input $\tau_t$;
 and the set $\{\delta_{i, y}\delta_{j, x}: i \in [H], j \in [W]\}$ is the \emph{focus output}.
-Note that only the element $\delta_{i, y}\delta_{j,x}$ -- which is respective to the chosen pixel coordinates $(x, y)$
+Note that only the element $\delta_{i, y}\delta_{j,x}$ --- which is respective to the chosen pixel coordinates $(x, y)$
 is equal to $1$.
 
+Table~\ref{tab:tx} summarizes the taxonomy of the works cited above.
+\begin{table}[H]
+\centering
+\caption{\small Taxonomy of cited works.}
+\begin{tabular}{|c|c|c|c|}
+	\hline
+     Work & Focus continuity & Focus flow & Focus subject\\
+    \hline
+     \cite{ref:show-attend-tell} & Soft & Enduring/Oriented & Data\\
+    \hline
+     \cite{ref:act} & Hard & Enduring/Oriented & Computation\\
+    \hline
+     \cite{ref:act} & Soft & Ephemeral & Data\\
+    \hline
+     \cite{ref:ram} & Hard & Enduring/Oriented & Data/Location-based\\
+    \hline
+\end{tabular}
+\label{tab:tx}
+\end{table}
 
-\printbibliography
-%\end{multicols}
-
-\end{document}
+\printbibliography\end{document}
