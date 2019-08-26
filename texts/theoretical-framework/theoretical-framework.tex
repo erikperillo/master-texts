@@ -91,25 +91,24 @@ In other words, \emph{attention} is the entity in \emph{agents} that, given \emp
 \section{How does Attention happen?}\label{sec:taxonomy}
 As mentioned in Section~\ref{sec:definition},
 in this work we summarize Attention as \emph{the allocation of computing resources to processes}.
-Thus, when attention is taking place, the system is directing its \emph{computing time budget} to certain \emph{programs} which,
+Thus, when attention is taking place, the system is performing a \emph{selection process}: it is directing its \emph{computing time budget} to certain \emph{programs} which,
 in turn, are being run with some subset of the possible \emph{data} as input.
-We name this selection process \emph{focus}.
 
-In some instances, some of the entities may not be subject to focus, thus remaining fixed.
+In some instances, some of the entities may not be subject to such selection, thus remaining fixed.
 There may be, for example, systems in which the program to be run and the computing resources are fixed and attention's role
 is to just select which data to be used.
-Another example is when both the program and the input data are fixed and Attention just selects how much computation time
+Another example is when both the program and the input data are fixed and Attention selects how much computation time
 should be dedicated to the process at a given time window.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\linewidth]{./img/mind.pdf}\label{fig:mind}
-    \caption{High level overview of the focus phenomenon. Focus is responsible for selecting computation resources for programs and also data to be used by the programs.}
+    \caption{High level overview of the focus phenomenon. Attention is responsible for selecting computation resources for programs and also data to be used by the programs.}
 \end{figure}
 
 The attention process takes place \emph{along the course of time}.
 At each time step in the process, \emph{inputs} of different classes are used to produce a certain \emph{output}.
-In a given \emph{timeframe}, the sequence of processing steps produce the emergence of \emph{focus}.
+In a given \emph{timeframe}, the sequence of processing steps produce the emergence of a \emph{selection flow}, or a process.
 In this section, we approach the entities and taxonomy related to the \emph{end-to-end} process itself.
 In the next section, we specifically model processing at each time step so that the processes described in this section emerge.
 
@@ -119,60 +118,106 @@ In the next section, we specifically model processing at each time step so that 
     \caption{The process of Attention.}
 \end{figure}
 
-\subsection{Input dimensions}
-The information to be used by the focus may be classified as:
-\begin{itemize}
-    \item \textbf{Context}: Context for the focus to happen. It may be either \emph{internal} or \emph{external}.
-    \item \textbf{Focus target}: Subjects of the focus.
-\end{itemize}
+\subsubsection{Types of Inputs}
+The information to be used by attention may be classified as either
+\emph{context} or \emph{targets}.
+Targets are the subjects of selection by attention.
+Context is the information used by attention
+in order to perform the selection.
+Context can be either \emph{internal} (agent state) or \emph{external}
+(information about the world) and the context may contain information
+about the past.
+An example is an recurrent attentional module for focusing on
+regions of a video flow. In such case, the hidden state of the network can
+be considered internal context; the frames can be considered the
+external context and the pixels of the image are the targets.
 
-\subsection{Focus dimensions}
-\subsubsection{Continuity}
-The continuity of focus can be either:
+\subsection{Selection taxonomy}
+\subsubsection{Subjects}
+The subject of the focus (i.e.\ the target type) may be 1) \emph{data},
+2) \emph{computing resources} or 3) \emph{programs}.
+
+For example, in a computer vision task of performing classification on an image,
+the data is the input image, the program is
+the classification algorithm and the computing resources are the
+amount of computation (either time or other measure) that will be applied
+to the task of classifying a subset of the image.
+
+Selection of \emph{data} regards selecting targets that are to be used as input
+to other processes.
+We can further classify this selection based on the nature of the data being
+selected, such as:
 \begin{itemize}
-    \item \textbf{Soft}: Continuously spread accross the targets, ``weighting''.
-    \item \textbf{Hard}: Discrete selection of one or more targets.
+    \item \textbf{Feature-based}: based on the features of a stimuli, such as color, orientation\ellipsis\
+    \item \textbf{Location-based}: based on the location of the stimuli, such as the coordinates of a pixel.
 \end{itemize}
+Selection of data is the most common of selection nowadays in
+Deep Learning systems.
+An example of a process of selection of data
+is the selection of a window of the input image to be processed
+in an image classification task.
+In this case, selection can be considered to be location-based.
+
+Selection of \emph{computing resources} is the selection of the amount
+of computation to be used for a given process
+One example is a recurrent neural network that performs substeps at
+each time step and at each step decides how many substeps to perform.
+
+\subsubsection{Continuity}
+The continuity of the process may be even 1) \emph{hard} or 2) \emph{soft}.
 This division has been popular in Deep Learning research lately.
 
+For \emph{hard} attention, the selection is discrete:
+the process performs selection of a subset of the targets.
+In the case of data, one example of hard selection is the
+selection of a specific subset of $k$ feature vectors (from $m \ge k$ options)
+to be further processed.
+
+For \emph{soft} attention, the selection is continuously spread accross the
+targets. It can be seen as of type of `weighting'' spread accross the targets.
+Using the example above, the selection of feature vectors could be soft ---
+in this case, instead of selecting a subset of vectors, every vector
+could be given a weight $0 \le w \le 1$ for a further convex combination
+of the vectors.
+
 \subsubsection{Flow}
-The flow of focus along time can be classified as:
+The flow of selection along time in a process
+can be classified as 1) \emph{Ephemeral} or 2) \emph{Enduring}.
+
+Ephemeral refers to selection of subjects in the context of a short time window.
+For example, in a task of visual control of a car,
+an attention process to identify the abrupt appearance of moving obstacles
+could be considered ephemeral since it does not take into account
+much context.
+On the other hand, an attentional process that keeps focus on
+a part of the road is not ephemeral, since it's long-termed.
+
+Enduring refers to selection of objects on a long time window.
+Using the example above, focusing on the road would be considered
+an enduring process.
+The enduring focus can be further classified as:
 \begin{itemize}
-    \item \textbf{Ephemeral}: Selection of subjects in the context of a short time window, such as salience.
-    \item \textbf{Enduring}: Selection of subjects in the context of a long time window. It can be of the following types:
-    \begin{itemize}
-        \item \textbf{Oriented}: An arbitrary focus sequence so as to complete a certain task.
-        \item \textbf{Sustained}: Focus restrained to a subset of the targets.
-        \item \textbf{Divided}: Focus alternating among a subset of the targets.
-    \end{itemize}
+    \item \textbf{Oriented}: An arbitrary focus sequence so as to complete a certain task.
+    \item \textbf{Sustained}: Focus restrained to a subset of the targets.
+    \item \textbf{Divided}: Focus alternating among a subset of the targets.
 \end{itemize}
 
-
-\subsubsection{Subject}
-The subject of the focus (i.e.\ the target type) may be:
-\begin{itemize}
-    \item \textbf{Computing} resources: Selection of computation time for a given task.
-    \item \textbf{Program}: Selection of a program among others to be executed.
-    \item \textbf{Data}: Selection of data (mostly stimuli). Examples of the nature of such date are:
-    \begin{itemize}
-        \item \textbf{Feature-based}: based on the features of a stimuli, such as color, orientation\ellipsis\
-        \item \textbf{Location-based}: based on the location of the stimuli, such as the coordinates of a pixel.
-    \end{itemize}
-\end{itemize}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\linewidth]{./img/taxonomy.pdf}\label{fig:taxonomy}
-    \caption{Focus attributes.}
+    \caption{Attention attributes.}
 \end{figure}
 
-\subsubsection{Using the result of the focus}
-The focus may be used for the allocation of some resource in various ways, such as:
-\begin{itemize}
-    \item Choosing the \textbf{amount} of \textbf{computation time} to be used at a certain step;
-    \item Choosing a \textbf{subset} of \textbf{elements} to carry out further computations;
-    \item \textbf{Weighting elements} to perform a certain computation.
-\end{itemize}
+%\subsection{Using the result of attention}
+%The result of selections made by attention
+%may be used for the allocation of some resource in various ways, such as:
+%
+%\begin{itemize}
+%    \item Choosing the \textbf{amount} of \textbf{computation time} to be used at a certain step;
+%    \item Choosing a \textbf{subset} of \textbf{elements} to carry out further computations;
+%    \item \textbf{Weighting elements} to perform a certain computation.
+%\end{itemize}
 
 \section{Attentional Module}
 We propose that the process of Attention --- as discussed in Section~\ref{sec:taxonomy}  --- can emerge by means of \emph{a series of components} --- which we call \emph{attentional modules}. These modules can alter data being processed and the execution flow of the algorithm and provide the functionalities of Attention.
@@ -341,17 +386,13 @@ Table~\ref{tab:tx} summarizes the taxonomy of the works cited above.
 \begin{table}[H]
 \centering
 \caption{\small Taxonomy of cited works.}
-\begin{tabular}{|c|c|c|c|}
+    \begin{tabular}{|c|c|c|c|}
 	\hline
      Work & Focus continuity & Focus flow & Focus subject\\
-    \hline
-     \cite{ref:show-attend-tell} & Soft & Enduring/Oriented & Data\\
-    \hline
-     \cite{ref:act} & Hard & Enduring/Oriented & Computation\\
-    \hline
-     \cite{ref:act} & Soft & Ephemeral & Data\\
-    \hline
-     \cite{ref:ram} & Hard & Enduring/Oriented & Data/Location-based\\
+    \hline~\cite{ref:show-attend-tell} & Soft & Enduring/Oriented & Data\\
+    \hline~\cite{ref:act} & Hard & Enduring/Oriented & Computation\\
+    \hline~\cite{ref:act} & Soft & Ephemeral & Data\\
+    \hline~\cite{ref:ram} & Hard & Enduring/Oriented & Data/Location-based\\
     \hline
 \end{tabular}
 \label{tab:tx}
