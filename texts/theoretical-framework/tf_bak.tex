@@ -51,6 +51,18 @@ This framework consists of two main parts:
 Note that the first element aims at answering the question ``\emph{What} is Attention?''
 while the second aims at explaining \emph{how} Attention emerges.
 
+\section{A definition of Attention}\label{sec:definition}
+In this definition, we define a set of \emph{entities of interest} and the phenomenon of Attention in terms of
+its \emph{functionalities} and how it relates to the entities.
+
+\subsection{Why is our definition good?}
+We believe our definition encompasses what we generally (and intuitively) refer to as attention while being not too broad.
+Also, the definition is given in terms related to Computer Science so it’s functionality nicely translates to the domain,
+which is important since we (so far) intend to develop AI using computers as we know it today.
+We may not encompass every aspect of Attention and even be conflicting with other definitions.
+However, this is the set of postulates that we think is the most precise and useful and thus this is
+what we choose to use for future work to be based on.
+
 \subsection{Entities}
 Below is the list of entities --- or ``terms'' --- we use in this work, along with a brief discussion of the meaning
 we give to each term in the context of this work.
@@ -68,26 +80,14 @@ we give to each term in the context of this work.
     \item\textbf{Goals:} the ends, objectives to be met.
 \end{itemize}
 
-\section{What is Attention?}\label{sec:definition}
-In this definition, we define the phenomenon of Attention in terms of
-its \emph{functionalities} and how it relates to our entities of interest.
-
-\subsection{Why is our definition good?}
-We believe our definition encompasses what we generally (and intuitively) refer to as attention while being not too broad.
-Also, the definition is given in terms related to Computer Science so it’s functionality nicely translates to the domain,
-which is important since we (so far) intend to develop AI using computers as we know it today.
-We may not encompass every aspect of Attention and even be conflicting with other definitions.
-However, this is the set of postulates that we think is the most precise and useful and thus this is
-what we choose to use for future work to be based on.
-
-\subsection{A broad definition of Attention}
+\subsection{What is Attention?}
 \emph{Data}, \emph{programs} and \emph{processes} are virtually \emph{infinite}.
 Computational \emph{resources} and \emph{actions} are finite.
 \emph{Attention} is \emph{the system of allocating resources to processes}.
 In other words, \emph{attention} is the entity in \emph{agents} that, given \emph{context} and a set of \emph{processes},
 \emph{allocates} \emph{resources} to execute each of them in order to \emph{produce} \emph{outputs} in form of \emph{data} and \emph{actions} in a \emph{correct sequential manner} and in \emph{sensible time} in order to reach \emph{goals}.
 
-\section{How does Attention happen?}\label{sec:model}
+\section{How does Attention happen?}\label{sec:taxonomy}
 The \emph{allocation} of \emph{resources} to \emph{processes}
 can be thought of as the process of
 performing \emph{selection} over the course of \emph{time}
@@ -101,18 +101,105 @@ The agent has inerent \emph{constraints}:
 Limited amount of \emph{computing resources}, \emph{data bandwidth} and \emph{actions}.
 However, it still has \emph{goals} that should be achieved via the execution of \emph{tasks}
 in \emph{sensible time}.
-In such context, the attention mechanism can be responsible for, given \emph{possible choices}
-of \emph{what to do} and \emph{which stimuli to use}, help perform the appropriate \emph{selection} along time.
+In such context, the attention mechanism can be responsible for, given \emph{possible choices},
+performing selection at \emph{two levels}: \emph{programs} and \emph{data} (figure~\ref{fig:mind}).
 Attention can help select which programs to be run.
 Once the programs that will be run are established, attention can also
 select which subset of the \emph{data} should be used by each program.
 Note that the way selection is performed over \emph{the course of time} is important for most tasks ---
 this is also covered by attention.
 
-\subsection{Attentional Modules}\label{sec:module}
-We propose that it is possible to model the selection process of Attention by means of \emph{a series of components} --- which we call \emph{attentional modules}.
-These modules can alter data being processed and the execution flow of the algorithm and provide the
-emergence of Attention.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{./img/mind.pdf}\label{fig:mind}
+    \caption{High level overview of the attention phenomenon. Attention is responsible for selecting programs to which computing resources should be applied and also data to be used by the programs.}
+\end{figure}
+
+\subsection{Attributes of Attention}
+We now describe in more details each component of the attention phenomenon
+as modeled in this work.
+
+\subsubsection{Continuity}\label{sec:attrs-continuity}
+The continuity of the process may be even \emph{hard} or \emph{soft}.
+This division has been popular in Deep Learning research lately.
+
+For \emph{hard} attention, the selection is \emph{discrete}:
+the process performs selection of a subset of the targets.
+One example of hard selection is the process of
+choosing a specific subset of $k$ feature vectors (from $m \ge k$ options)
+to be further processed.
+
+For \emph{soft} attention, the selection is \emph{continuously} spread accross the
+targets. It can be seen as of type of `weighting'' spread accross the targets.
+Using the example above, the selection of feature vectors could be soft ---
+in this case, instead of selecting a subset of vectors, every vector
+could be given a weight $0 \le w \le 1$ for a subsequent convex combination.
+
+\subsubsection{Subjects}\label{sec:attrs-subjects}
+As mentioned before,
+the subject of the focus (i.e.\ the target type) may be either \emph{data} or \emph{programs}.
+
+Selection of \emph{data} regards selecting targets that are to be used as input
+to other processes.
+Data can be thought of as a vector of arbitrary dimensionality.
+We can further classify this selection based on the \emph{semantic meaning}
+of the selection:
+\begin{itemize}
+    \item \textbf{Location-based}: based on the location of the stimuli, such as the coordinates of a pixel.
+    \item \textbf{Feature-based}: based on the features of a stimuli, such as color, orientation.
+    \item \textbf{Object-based}: based on semantic elements of the stimuli, such as a specific toy in an image.
+\end{itemize}
+It is worth noting that, in the end, every data selection can be considered to be location-based.
+After all, the targets of selection will always be discrete items of a vector (pixels of an image, for example).
+This further semantic division is nonetheless useful.
+
+An example of a process of selection of data
+is the selection of a subregion of the input image to be processed
+in an image classification task.
+In this case, selection can be considered to be location-based.
+If the selection chooses a discrete subset of the pixels, it can be
+considered to be hard.
+If, however, the selection takes place as producing a
+heatmap mapping each pixel to a continuous value, the selection can be
+considered to be soft.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{./img/dataselsem.pdf}\label{fig:dataselsem}
+    \caption{Examples of data selection semantic meanings.}
+\end{figure}
+
+\subsubsection{Flow}\label{sec:attrs-flow}
+The \emph{flow} (or course) of \emph{selection along time} in a process
+can be classified as \emph{ephemeral} or \emph{enduring}.
+
+Ephemeral refers to selection of subjects in the context of a \emph{short time window}.
+The evolution of selection along time is not important --- only the instantaneous selection is.
+For example, in a task of visual control of a car,
+an attention process to identify the abrupt appearance of moving obstacles
+could be considered ephemeral since it does not take into account
+much context and only happens during a short time window.
+
+Enduring refers to the process of selection of objects over a \emph{long time window}.
+The enduring focus can be further classified as:
+\begin{itemize}
+    \item \textbf{Oriented}: An arbitrary focus sequence so as to complete a certain task.
+    \item \textbf{Sustained}: Focus restrained to a subset of the targets.
+    \item \textbf{Divided}: Focus alternating among a subset of the targets.
+\end{itemize}
+Using the example of visual control of a car,
+constantly focusing on the road would be considered \emph{sustained} selecttion.
+Reading the signs of the road is an \emph{oriented} process since the focus must correctly follow the sequence of letters.
+Alternatting focus among the mirrors, the speedometer and the road can be considered to be \emph{divided} selection.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{./img/taxonomy.pdf}\label{fig:taxonomy}
+    \caption{Attention attributes.}
+\end{figure}
+
+\section{Attentional Module}
+We propose that the process of Attention --- as discussed in Section~\ref{sec:taxonomy}  --- can emerge by means of \emph{a series of components} --- which we call \emph{attentional modules}. These modules can alter data being processed and the execution flow of the algorithm and provide the functionalities of Attention.
 
 \begin{figure}[H]
     \centering
@@ -135,143 +222,37 @@ The module produces as \emph{output} (as a function of both inputs):
         where $A$ is the \emph{focus output set}.
 \end{itemize}
 
-The focus target elements are finite and express the idea of a set of possible choices for the selection process.
-The state elements (both outer and inner) express the fact that selection if often contextual.
 The focus output is the main element of the module: it can be used to allocate \emph{finite resources} to a set of ``candidate targets'' by giving them an ``importance score'' which can be used in any arbitrary way in following steps.
 Each element $\alpha_{tk}$ is respective to a target element $\tau_{tk}$.
 
+\subsection{Modules and the attributes of Attention}
 A system with Attention may contain more than one attentional modules --- even in a recursive manner.
-Together, these modules always perform the function to provide selection capabilities.
-The modules can assume different profiles according to their target-focus mapping
-and the nature of the data involved in the processing.
-Some of such profiles are worth mentioning and are summarized in Figure~\ref{fig:seltax}.
+Together, these modules always perform the function to provide selection capabilities
+as discussed in Section~\ref{sec:taxonomy}.
+We now provide some examples of how the attentional modules can act to provide such functionalities.
 
 \subsubsection{Soft and Hard selection}
-The selection may occur either by choosing a discrete subset of the possible choices
-or by perfoming a ``soft'' and/or non-deterministic selection, giving real-valued scores to
-the possible choices.
-The different types of selection can be implemented with modules by appropriately
-choosing the focus output set $A$:
+The different selection continuities (Section~\ref{sec:attrs-continuity})
+can be obtained by means of attentional modules in the following manner:
 \begin{itemize}
     \item \textbf{Soft selection}:
         $A = [0, 1]$, with $0 \le \sum_{i=1}^{k} \alpha_{ti} \le 1$
     \item \textbf{Hard selection}:
-        $A = \{0, 1\}$, with $0 \le \sum_{i=1}^{k} \alpha_{ti} \le M_t$ and $0 \le M_t \le |\tau_t|$
+        $A = \{0, 1\}$, with $0 \le \sum_{i=1}^{k} \alpha_{ti} \le M$ and $0 \le M \le |\tau_t|$
 \end{itemize}
 
-\subsubsection{Selection state profile}
-As mentioned before, time is usually important in the context of a task
-and so attention may provide selection and a specific evolution of selection
-along the course of time so as to be useful for the task.
-In some cases, however, selection takes place in a short window so that the past must not be taken
-into consideration.
-We can divide both profiles of time signature as \emph{stateful} and \emph{stateless} selection.
-The presence of inner/outer states (or lack thereof) in the module can implement this behavior:
-\begin{itemize}
-    \item \textbf{Stateful selection}:
-        $\iota_t \neq \emptyset$ or $o_t \neq \emptyset$
-    \item \textbf{Stateless selection}:
-        $\iota_t = \emptyset$ and $o_t = \emptyset$
-\end{itemize}
+\subsubsection{Subjects of selection}
+Although the subjects selection (Section~\ref{sec:attrs-subjects})
+differentiatie between programs and data, to the modules everything
+can be treated simply as data. We provide some examples below.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\linewidth]{./img/sel_taxonomy.pdf}\label{fig:seltax}
-    \caption{Some of the taxonomy of the selection provided by attentional modules.}
-\end{figure}
-
-\subsection{The semantics of selection}
-Although attention can be simply modeled as process of selecting
-items from a set of possible choices (Section~\ref{sec:module}),
-very often there is \emph{semantic meaning} to it --
-which is given in the \emph{context of the task} being performed.
-We can cite as an example the act of visually tracking a specific car on the road.
-Even though attention is technically the simple selection of items from the image (pixels),
-the semaning meaning is that of \emph{focusing on the car}, which
-is implemented by proper selection of pixels that refer to the car over the
-course of time relevant to the task.
-In this section, we discuss in detail some aspects of the semantic meanings of selection.
-Figure~\ref{fig:semtax} summarizes the categorization.
-
-\subsubsection{Subjects of selection}\label{sec:attrs-subjects}
-The items to be selected (i.e.\ the target type) may be semantically classified as
-either \emph{data} or \emph{programs}.
-Selection of \emph{data} regards selecting targets that are to be used as input to other processes.
-Selection of \emph{programs} regards selecting targets that refer to
-programs to be executed (Figure~\ref{fig:mind}).
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\linewidth]{./img/mind.pdf}\label{fig:mind}
-    \caption{High level overview of the semantic subjects of selection. Given computing time budget and context of the task, the appropriate programs can be allocated and the relevant data can be used by the programs.}
-\end{figure}
-
-We can further classify the semantic meaning of selection of data as:
-\begin{itemize}
-    \item \textbf{Location-based}: based on the location of the stimuli, such as the coordinates of a pixel.
-    \item \textbf{Feature-based}: based on the features of a stimuli, such as color, orientation.
-    \item \textbf{Object-based}: based on semantic elements of the stimuli, such as a specific toy in an image.
-\end{itemize}
-Figure~\ref{fig:dataselsem} shows some examples of each category.
-An example of a process of selection of data
-is the selection of a subregion of the input image to be processed
-in an image classification task.
-In this case, selection can be considered to be location-based.
-It is worth noting that, in the end, every data selection can be considered to be location-based.
-After all, the targets of selection will always be discrete items of a vector (pixels of an image, for example).
-This further categorization is nonetheless useful.
-
-The semantic meaning of selection of programs can also be further classified into two broad categories:
-\begin{itemize}
-    \item \textbf{Program choice}: given options choose one (or more) programs to be executed next.
-    \item \textbf{Computing time choice}: given computational time ``budget'' and programs,
-        choose how much computing time to allocate to each program.
-\end{itemize}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{./img/dataselsem.pdf}\label{fig:dataselsem}
-    \caption{Examples of data selection semantic categories.}
-\end{figure}
-
-\subsubsection{Selection course along time}\label{sec:attrs-flow}
-The course of selection \emph{along time} in a process
-can be classified as \emph{ephemeral} or \emph{enduring}.
-
-Ephemeral refers to selection of subjects in the context of a \emph{short time window}.
-The evolution of selection along time is not important --- only the instantaneous selection is.
-For example, in a task of visual control of a car,
-an attention process to identify the abrupt appearance of moving obstacles
-could be considered ephemeral since it does not take into account
-much context and only happens during a short time window.
-
-Enduring refers to the process of selection of objects over a \emph{long time window}.
-The enduring focus can be further classified as:
-\begin{itemize}
-    \item \textbf{Oriented}: An arbitrary focus sequence so as to complete a certain task.
-    \item \textbf{Sustained}: Focus restrained to a subset of the targets.
-    \item \textbf{Divided}: Focus alternating among a subset of the targets.
-\end{itemize}
-Using the example of visual control of a car,
-constantly focusing on the road would be considered \emph{sustained} selection.
-Reading the signs of the road is an \emph{oriented} process since the focus must correctly follow the sequence of letters.
-Alternatting focus among the mirrors, the speedometer and the road can be considered to be \emph{divided} selection.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\linewidth]{./img/sem_taxonomy.pdf}\label{fig:semtax}
-    \caption{Taxonomy of selection semantics.}
-\end{figure}
-
-\subsection{Modules and semantics: examples}
-
-\textbf{Program choice --- Selection of a single program}:
+\textbf{Selection of a single program}:
 In this example, the system executes only one program at once and must
 select the next task to be executed.
 We can consider the target set $T$ to be the set of possible $N$ programs
 and use hard attention: $A \in \{0, 1\}$, with $0 \le \sum_{i=1}^{N} \alpha_{ti} \le 1$.
 
-\textbf{Program choice --- allocation of computing time}:
+\textbf{Program selection --- allocation of computing time}:
 In this example, the system contains only one program $p$ to be executed but
 must decide how much computation to ``spend'' (from the ``budget'' $B$) on the program at a certain timestep.
 We can set the target set $T$ to be $\{p, nop\}$ (considering $nop$ to be doing nothing) and
@@ -291,16 +272,26 @@ In this example, the system must give weights (summing to 1) to the channels R, 
 The focus targets $\tau_t$ at time $t$ may represent the respective channels: $\{R_{t}, G_{t}, B_{t}\}$
 use soft attention: $A \in [0, 1]$, with $\alpha_{t1} + \alpha_{t2} + \alpha_{t3} = 1$.
 
-\textbf{Ephemeral selection}:
+Note that the semantic objects of data selection often cannot be directly modeled
+as they refer to a high level and subjective context, but
+such type of selection (and other higher level functionalities)
+can nonetheless emerge by means of a combination of modules that ir right for the task.
+
+\subsubsection{Selection flow type}
+We provide below some examples of how the different selection flow types (Section~\ref{sec:attrs-subjects})
+can emerge with modules.
+
+\textbf{Ephemeral flow selection}:
 Such type of selection takes place during a short
 time window and state is usually not important.
-Thus, we can often simply model it by means of a module with \emph{stateless} selection.
+Thus, we can simply model it by means of a module with the inner state at any time $t$ to be
+null: $\iota_t = \emptyset$.
 
-\textbf{Enduring selection}:
+\textbf{Enduring flow selection}:
 Selection flows which take place along a long time window usually require
-information about the past, so the module implementing it must often provide \emph{stateful} selection.
+information about the past, so the inner state must be non-empty: $\iota_t \ne \emptyset$.
 
-\textbf{Sustained selection}:
+\textbf{Sustained flow selection}:
 Sustained flow can be achieved, for example, by using
 one attentional module followed by another.
 Suppose there are $M$ target elements to be selected and we want to restrict
@@ -312,16 +303,17 @@ $\{\tau_{ti}: \alpha_{ti} = 1\}$.
 
 \subsubsection{Example of an entire system}
 Figure~\ref{fig:attsystem} shows the diagram of a possible system with attention.
-The module \emph{TaskATT} uses hard selection to choose a certain task $k$ to be executed for some time at time step $t$.
-Among the computations of task $k$, there is the module \emph{DataATT}, which uses soft selectin to allocate resources to a set of items.
+The module \emph{TaskATT} uses hard attention to select a certain task $k$ to be executed for some time at time step $t$.
+Among the computations of task $k$, there is the module \emph{DataATT}, which uses soft attention to allocate resources to a set of items.
 It is worth noting that time is relative to each attentional module: \emph{TaskATT} has a temporal course over time steps $t$ that is different from that of \emph{DataATT}, which is over time steps $t'$.
 Also, their sets of inputs and outputs may differ.
-Semantically speaking, the selections executed by the modules
-provide \emph{program choice} and \emph{data selection} capabilities.
+Together, these modules provide two types of focus:
+\emph{hard}, \emph{enduring}/\emph{oriented} focus on \emph{programs} and
+\emph{soft}, \emph{ephemeral} focus on data.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\linewidth]{./img/att_blocks_example.pdf}\label{fig:attsystem}
+    \includegraphics[width=0.8\linewidth]{./img/att_blocks_example.pdf}\label{fig:attsystem}
     \caption{Example of a system that uses attention.}
 \end{figure}
 
@@ -337,18 +329,18 @@ vector to be used in further computations.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{./img/img_captioning.png}\label{fig:imgcaptioning}
+    \includegraphics[width=0.8\linewidth]{./img/img_captioning.png}\label{fig:imgcaptioning}
     \caption{Diagram of natural language image description using Attention
     (from~\cite{ref:img-captioning}).}
 \end{figure}
 
 While there are many abstract processing substeps in the process, the \emph{end-to-end} effect is that of
-a selection with \emph{orienting} course along time, targetting \emph{data}
-on an \emph{object-based} manner. Figure~\ref{fig:imgcaptioning} illustrates the proposed model.
+a focus with \emph{soft} continuity, with \emph{orienting} flow, targetting \emph{data}
+on a \emph{Location-based} manner. Figure~\ref{fig:imgcaptioning} illustrates the proposed model.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{./img/captioning.pdf}\label{fig:captioning}
+    \includegraphics[width=0.8\linewidth]{./img/captioning.pdf}\label{fig:captioning}
     \caption{Model proposed for image captioning in~\cite{ref:show-attend-tell} with attentional module.}
 \end{figure}
 
@@ -369,17 +361,20 @@ $p_{t',t}$.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\linewidth]{./img/adaptive_comp.png}\label{fig:adct}
+    \includegraphics[width=0.8\linewidth]{./img/adaptive_comp.png}\label{fig:adct}
     \caption{Adaptive computation time process illustration.}
 \end{figure}
 
-The attention component provides two types of selection:
-\emph{computing time choice} \emph{oriented} over time and
-\emph{ephemeral} data selection.
+The attention component provides two types of focus:
+The selection of computing substeps at each step can be thought as a focus flow with \emph{soft} continuity,
+\emph{oriented} signature and \emph{programs} (in this case, only one program and halting are options)
+as selection target.
+The computation of the result of each step uses \emph{soft} selection of \emph{ephemeral}
+signature and \emph{data} as focus target.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\linewidth]{./img/act.pdf}\label{fig:act}
+    \includegraphics[width=0.75\linewidth]{./img/act.pdf}\label{fig:act}
     \caption{Model proposed for image captioning in~\cite{ref:act} with attentional module.}
 \end{figure}
 
@@ -388,7 +383,7 @@ The proposed model can be thought as having two attention modules:
 \begin{itemize}
     \item \textbf{$ATT_{budget}$}, which computes the value $0 \le p_{t',t} \le 1$ to be spent at a given sub-step.
         In this analogy, $s_{t',t}$ --- the state of the RNN cell --- is the \emph{outer state} $o_t$;
-        $\psi_t$ --- an element representing the current computation sub-step --- is the \emph{target} $\tau_t$;
+        $\psi_t$ --- a dummy element representing the current computation sub-step --- is the \emph{target} $\tau_t$;
         and $i_{t',t}$ is the \emph{inner state}.
         The \emph{focus output} $p_{t',t}$, besides representing values to be consumed from the budget,
         can be thought of as an importance weight for the final output $y_t$, since the produced values are used to computed
@@ -414,7 +409,7 @@ An arbitrary action $a_t$ can be executed to possibly alter the environment.
 \end{figure}
 
 The attention component in the proposed model can be thought as providing
-\emph{oriented} selection of \emph{data} in a \emph{location-based} manner.
+\emph{hard}, \emph{oriented} selection of \emph{data} in a \emph{location-based} manner.
 
 \begin{figure}[H]
     \centering
@@ -430,34 +425,19 @@ and the set $\{\delta_{i, y}\delta_{j, x}: i \in [H], j \in [W]\}$ is the \emph{
 Note that only the element $\delta_{i, y}\delta_{j,x}$ --- which is respective to the chosen pixel coordinates $(x, y)$
 is equal to $1$.
 
-Tables~\ref{tab:tx} and~\ref{tab:ts} summarize the categorizations of the works cited above.
+Table~\ref{tab:tx} summarizes the taxonomy of the works cited above.
 \begin{table}[H]
 \centering
-\caption{\small Selection taxonomy of cited works.}
-    \begin{tabular}{|c|c|c|}
+\caption{\small Taxonomy of cited works.}
+    \begin{tabular}{|c|c|c|c|}
 	\hline
-    Work & Continuity & State profile\\
-    \hline~\cite{ref:show-attend-tell} & Soft & Stateful\\
-    \hline~\cite{ref:act} & Hard & Stateful\\
-    \hline~\cite{ref:act} & Soft & Stateful\\
-    \hline~\cite{ref:ram} & Hard & Stateful\\
+     Work & Focus continuity & Focus flow & Focus subject\\
+    \hline~\cite{ref:show-attend-tell} & Soft & Oriented & Data/Object-based\\
+    \hline~\cite{ref:act} & Hard & Oriented & Program\\
+    \hline~\cite{ref:act} & Soft & Ephemeral & Data\\
+    \hline~\cite{ref:ram} & Hard & Oriented & Data/Location-based\\
     \hline
 \end{tabular}\label{tab:tx}
 \end{table}
 
-\begin{table}[H]
-\centering
-\caption{\small Selection semantics taxonomy of cited works.}
-    \begin{tabular}{|c|c|c|}
-	\hline
-    Work & Course along time & Semantic target\\
-    \hline~\cite{ref:show-attend-tell} & Enguring/Oriented & Data/Object-based\\
-    \hline~\cite{ref:act} & Enduring/Oriented & Program/Computing time choice\\
-    \hline~\cite{ref:act} & Ephemeral & Data\\
-    \hline~\cite{ref:ram} & Enguring/Oriented & Data/Location-based\\
-    \hline
-\end{tabular}\label{tab:ts}
-\end{table}
-
-\printbibliography
-\end{document}
+\printbibliography\end{document}
